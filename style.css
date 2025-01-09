@@ -86,3 +86,13 @@ footer{
     /* border-color: #cba6f7; */
     /* border-style: solid; */
 }
+.content2{
+    height: 700px;
+    margin:5px;
+    width: auto;
+    border-width: 1px;
+    border-radius: 13px;
+    border-color: #cba6f7;
+    border-style: solid;
+    margin-bottom: 1%;
+}
