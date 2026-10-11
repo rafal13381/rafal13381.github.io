@@ -3,38 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clicker</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Clicker · rafal13381</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="style.css?v=20261011e">
+    <script src="theme.js?v=20261011e"></script>
 </head>
 <body>
-    <div class="banner">
-        <h2>rafal13381</h2>
-    </div>
-    <div class="content" style="height: 350px;">
-        <h2>Clicker</h2>
-        <h3>Score: <span id="score">0</span></h3>
-        <button id="clickButton">Click</button>
-        <button id="resetButton">Reset</button>
+    <header class="nav wrap">
+        <nav class="panel" aria-label="Main">
+            <a class="brand" href="index.html">
+                <span class="brand-mark" aria-hidden="true">r</span>
+                <span>rafal13381</span>
+            </a>
+            <div class="tabs">
+                <a class="tab" href="index.html">Start</a>
+                <a class="tab" href="kliker.html" aria-current="page">Kliker</a>
+                <a class="tab" href="style.html">Style</a>
+            </div>
+            <button class="icon-btn" id="themeToggle" type="button" aria-label="Theme"></button>
+        </nav>
+    </header>
 
-        <h3>Upgrades:</h3>
-        <button id="multiplierUpgrade">Multiplier (x2) - Cost: <span id="multiplierCost">10</span></button>
-        <button id="autoClickerUpgrade">Auto-Clicker - Cost: <span id="autoClickerCost">50</span></button>
-        <br>
-        <h3>Tax : <span id="taxCountdown">10</span> sec</h3>
-        <br>
-        <button id="startButton">Start Game</button>
+    <main class="wrap game">
+        <section class="grid">
+            <article class="panel span-8 score-panel materialize">
+                <span class="label">Score</span>
+                <div><span class="score" id="score" aria-live="polite">0</span></div>
+                <div class="score-meta">
+                    <span class="stat">Per click <b>×<span id="multiplier">1</span></b></span>
+                    <span class="stat" id="autoStat">Auto-clicker <b id="autoState">off</b></span>
+                    <span class="stat warn">Tax <b>−<span id="taxAmount">5</span></b> in <b><span id="taxCountdown">10</span>s</b></span>
+                </div>
 
-    </div>
-    <div class="content" style="height: 150px;">
-        <h2> Back to main site</h2>
-        <br>
-        <br>
-        <b><a href="index.html"><div class="bbutton">Click to back to main site 🥑</div></a></b>
-    </div>
-    <footer>
-        Author: rafal13381
-        <p>Theme by rafal13381</p>
+                <div class="click-zone">
+                    <button class="click-btn" id="clickButton" type="button" disabled>Click</button>
+                </div>
+
+                <div class="hero-actions" style="justify-content:center">
+                    <button class="btn btn-primary" id="startButton" type="button">Start Game</button>
+                    <button class="btn btn-secondary" id="resetButton" type="button" disabled>Reset</button>
+                </div>
+            </article>
+
+            <aside class="span-4" style="display:flex;flex-direction:column;gap:16px">
+                <article class="panel materialize" style="--i:1">
+                    <div class="card-head">
+                        <h2>Upgrades</h2>
+                    </div>
+                    <div class="rows">
+                        <button class="upgrade" id="multiplierUpgrade" type="button" disabled>
+                            <span class="row-ico" aria-hidden="true">✖️</span>
+                            <span class="row-text">
+                                <span class="row-title">Multiplier</span>
+                                <span class="row-sub">Doubles points per click</span>
+                            </span>
+                            <span class="price"><span id="multiplierCost">30</span></span>
+                        </button>
+                        <button class="upgrade" id="autoClickerUpgrade" type="button" disabled>
+                            <span class="row-ico" aria-hidden="true">⚙️</span>
+                            <span class="row-text">
+                                <span class="row-title">Auto-Clicker</span>
+                                <span class="row-sub">Clicks once every second</span>
+                            </span>
+                            <span class="price"><span id="autoClickerCost">50</span></span>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="panel materialize" style="--i:2">
+                    <div class="card-head">
+                        <h2>Tax</h2>
+                        <span class="label">every 10 s</span>
+                    </div>
+                    <p class="row-sub" style="white-space:normal">If you can’t pay the tax, it’s game over and the score resets.</p>
+                    <div class="progress" aria-hidden="true"><span id="taxBar"></span></div>
+                </article>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="site-footer wrap">
+        <div class="footer-inner">
+            <a class="brand" href="index.html">
+                <span class="brand-mark" aria-hidden="true">r</span>
+                <span>rafal13381</span>
+            </a>
+            <nav class="footer-links" aria-label="Stopka">
+                <a href="index.html">Start</a>
+                <a href="kliker.html">Kliker</a>
+                <a href="style.html">Style</a>
+                <a href="https://github.com/rafal13381">GitHub</a>
+            </nav>
+            <p class="footer-copy">© 2026 rafal13381 · Programista Full Stack</p>
+        </div>
     </footer>
-    <script src="script2.js"></script>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="script2.js?v=20261011e"></script>
 </body>
 </html>

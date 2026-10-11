@@ -1,10 +1,20 @@
-function pokazCzas() { 
-    var teraz = new Date(); 
-    var godzina = teraz.getHours(); 
-    var minuta = teraz.getMinutes(); 
-    var sekunda = teraz.getSeconds(); 
-    var data = teraz.toLocaleDateString(); 
-    var czasElement = document.getElementById("czas"); 
-    czasElement.innerHTML = "Hour: " + godzina + ":" + (minuta < 10 ? "0" + minuta : minuta) + ":" + (sekunda < 10 ? "0" + sekunda : sekunda) + "<br>Date: " + data;
-} 
-setInterval(pokazCzas, 1000);
+function pad(n) {
+    return n < 10 ? "0" + n : n;
+}
+
+function pokazCzas() {
+    var teraz = new Date();
+    var czas = document.getElementById("czas");
+    var data = document.getElementById("data");
+    if (!czas) return;
+    czas.innerHTML = teraz.getHours() + ":" + pad(teraz.getMinutes()) +
+        '<span class="sec">' + pad(teraz.getSeconds()) + "</span>";
+    data.textContent = teraz.toLocaleDateString("pl-PL", {
+        weekday: "long", day: "numeric", month: "long", year: "numeric"
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    pokazCzas();
+    setInterval(pokazCzas, 1000);
+});

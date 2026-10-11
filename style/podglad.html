@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podgląd stylu · rafal13381</title>
+    <meta name="description" content="Podgląd stylu interfejsu na przykładowej aplikacji, z paletą, kontrastem i kodem CSS.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../style.css?v=20261011e">
+    <link rel="stylesheet" href="probka.css?v=20261011e">
+    <script src="../theme.js?v=20261011e"></script>
+    <script src="styles.js?v=20261011e" defer></script>
+    <script src="kolekcja.js?v=20261011e" defer></script>
+    <script src="tokens.js?v=20261011e" defer></script>
+    <script src="probka.js?v=20261011e" defer></script>
+    <script src="ui.js?v=20261011e" defer></script>
+    <script src="generator.js?v=20261011e" defer></script>
+    <script src="podglad.js?v=20261011e" defer></script>
+</head>
+<body>
+    <header class="nav wrap">
+        <nav class="panel" aria-label="Główna">
+            <a class="brand" href="../index.html">
+                <span class="brand-mark" aria-hidden="true">r</span>
+                <span>rafal13381</span>
+            </a>
+            <div class="tabs">
+                <a class="tab" href="../index.html">Start</a>
+                <a class="tab" href="../kliker.html">Kliker</a>
+                <a class="tab" href="../style.html" aria-current="page">Style</a>
+            </div>
+            <button class="icon-btn" id="themeToggle" type="button" aria-label="Motyw"></button>
+        </nav>
+    </header>
+
+    <main class="wrap wrap-wide preview-page">
+        <div class="preview-top">
+            <a class="back-link" id="back" href="../style.html#katalog">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+                <span id="backLabel">Katalog stylów</span>
+            </a>
+            <div class="preview-title">
+                <div>
+                    <p class="label" id="pPos"></p>
+                    <h1 id="pName">Styl</h1>
+                    <p class="lead" id="pTagline"></p>
+                    <div class="chips chips-sm" id="pMeta"></div>
+                </div>
+                <div class="preview-actions">
+                    <div class="seg" id="pMode" role="group" aria-label="Tryb podglądu">
+                        <button class="seg-btn" type="button" data-mode="light" aria-pressed="true">Jasny</button>
+                        <button class="seg-btn" type="button" data-mode="dark" aria-pressed="false">Ciemny</button>
+                    </div>
+                    <div class="pager" id="pPager">
+                        <a class="icon-btn" id="pPrev" href="#" aria-label="Poprzedni styl" title="Poprzedni styl (←)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></a>
+                        <a class="icon-btn" id="pNext" href="#" aria-label="Następny styl" title="Następny styl (→)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></a>
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="pCopy" type="button">Kopiuj CSS</button>
+                    <a class="btn btn-secondary btn-sm" id="pStylownik" href="#" hidden>Stylownik</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pk-frame pk-frame-lg" id="pProbka"></div>
+
+        <section class="grid preview-details">
+            <article class="panel span-12">
+                <div class="card-head"><h2>Paleta</h2><span class="label">kliknij kolor, aby skopiować</span></div>
+                <div class="gen-palette" id="pPalette"></div>
+            </article>
+            <article class="panel span-12">
+                <div class="card-head"><h2>Kod CSS</h2><span class="label">tryb jasny i ciemny</span></div>
+                <pre class="code"><code id="pCss"></code></pre>
+            </article>
+        </section>
+        <p class="empty" id="pMissing" hidden>Nie znaleziono takiego stylu. <a href="../style.html#katalog">Wróć do katalogu</a>.</p>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <footer class="site-footer wrap wrap-wide">
+        <div class="footer-inner">
+            <a class="brand" href="../index.html">
+                <span class="brand-mark" aria-hidden="true">r</span>
+                <span>rafal13381</span>
+            </a>
+            <nav class="footer-links" aria-label="Stopka">
+                <a href="../index.html">Start</a>
+                <a href="../kliker.html">Kliker</a>
+                <a href="../style.html">Style</a>
+                <a href="https://github.com/rafal13381">GitHub</a>
+            </nav>
+            <p class="footer-copy">© 2026 rafal13381 · Programista Full Stack</p>
+        </div>
+    </footer>
+</body>
+</html>
