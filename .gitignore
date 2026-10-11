@@ -1,0 +1,12 @@
+# pliki systemowe
+.DS_Store
+
+# narzędzia i konfiguracja asystenta
+.agents/
+.claude/
+skills-lock.json
+
+# kopia starej strony i notatki robocze
+old/
+zamysl.md
+zmiana_opisu.md
