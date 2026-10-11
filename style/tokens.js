@@ -171,9 +171,12 @@
         families(st).forEach(function (n) {
             if (loaded[n]) return;
             loaded[n] = true;
+            // czcionki z Google tylko po zgodzie (consent.js); bez niej zostają fonty systemowe
             var l = document.createElement("link");
             l.rel = "stylesheet";
-            l.href = fontUrl([n]);
+            l.setAttribute("data-consent", "fonts");
+            l.dataset.href = fontUrl([n]);
+            if (!g.Consent || g.Consent.allowed("fonts")) l.href = l.dataset.href;
             document.head.appendChild(l);
         });
     }

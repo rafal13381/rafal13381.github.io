@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prywatność · rafal13381</title>
+    <meta name="description" content="Jakie dane zapisuje strona rafal13381.github.io, z jakich usług zewnętrznych korzysta i jak zmienić ustawienia prywatności.">
+    <link rel="stylesheet" data-consent="fonts" data-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <script src="consent.js?v=20261011f"></script>
+    <link rel="stylesheet" href="style.css?v=20261011f">
+    <script src="theme.js?v=20261011f"></script>
+</head>
+<body>
+    <header class="nav wrap">
+        <nav class="panel" aria-label="Main">
+            <a class="brand" href="index.html">
+                <span class="brand-mark" aria-hidden="true">r</span>
+                <span>rafal13381</span>
+            </a>
+            <div class="tabs">
+                <a class="tab" href="index.html">Start</a>
+                <a class="tab" href="kliker.html">Kliker</a>
+                <a class="tab" href="style.html">Style</a>
+            </div>
+            <button class="icon-btn" id="themeToggle" type="button" aria-label="Theme"></button>
+        </nav>
+    </header>
+
+    <main class="wrap legal">
+        <section class="hero hero-sm">
+            <span class="eyebrow materialize"><span class="dot"></span>Ostatnia aktualizacja: 11 października 2026</span>
+            <h1 class="materialize" style="--i:1">Prywatność i pliki cookie</h1>
+            <p class="lead materialize" style="--i:2">
+                Ta strona to osobiste portfolio. Nie zbieram danych o odwiedzających, nie używam analityki,
+                reklam ani ciasteczek śledzących. Poniżej dokładnie opisuję, co zapisuje Twoja przeglądarka
+                i z jakich usług zewnętrznych korzysta strona.
+            </p>
+            <div class="hero-actions materialize" style="--i:3">
+                <button class="btn btn-primary" type="button" data-consent-open>Zmień ustawienia prywatności</button>
+                <span class="label" id="consentState"></span>
+            </div>
+        </section>
+
+        <section class="grid">
+            <article class="panel span-12 materialize" style="--i:4">
+                <div class="card-head"><h2>W skrócie</h2></div>
+                <ul class="rows rows-grid-3">
+                    <li class="row"><span class="row-text"><span class="row-title">Brak plików cookie</span><span class="row-sub wrap-text">Strona nie ustawia żadnych ciasteczek — ani własnych, ani zewnętrznych.</span></span></li>
+                    <li class="row"><span class="row-text"><span class="row-title">Ustawienia tylko u Ciebie</span><span class="row-sub wrap-text">Motyw i opcje generatora zapisują się w pamięci przeglądarki i nie trafiają na serwer.</span></span></li>
+                    <li class="row"><span class="row-text"><span class="row-title">Czcionki Google za zgodą</span><span class="row-sub wrap-text">Bez zgody strona używa fontów systemowych i nie łączy się z Google.</span></span></li>
+                </ul>
+            </article>
+
+            <article class="panel span-12 materialize" style="--i:5">
+                <div class="card-head"><h2>Kto odpowiada za stronę</h2></div>
+                <div class="prose">
+                    <p>Autorem i administratorem strony <b>rafal13381.github.io</b> jest jej właściciel, publikujący jako
+                    <a href="https://github.com/rafal13381">@rafal13381</a> na GitHubie. W sprawach prywatności możesz się skontaktować przez profil GitHub.</p>
+                </div>
+            </article>
+
+            <article class="panel span-12 materialize" style="--i:6">
+                <div class="card-head"><h2>Pamięć przeglądarki</h2><span class="label">localStorage</span></div>
+                <div class="prose">
+                    <p>Strona zapisuje kilka ustawień w pamięci lokalnej Twojej przeglądarki (localStorage). To nie są pliki cookie:
+                    dane nie są wysyłane na serwer przy żadnym żądaniu i nikt poza Tobą ich nie odczyta. Zostają do czasu,
+                    aż wyczyścisz dane witryny w przeglądarce.</p>
+                </div>
+                <div class="table-wrap">
+                    <table class="contrast legal-table">
+                        <thead><tr><th>Klucz</th><th>Do czego służy</th><th>Rodzaj</th></tr></thead>
+                        <tbody>
+                            <tr><td class="mono">consent</td><td>Zapamiętuje Twój wybór z banera prywatności.</td><td>Niezbędny</td></tr>
+                            <tr><td class="mono">theme</td><td>Wybrany motyw strony: systemowy, jasny lub ciemny.</td><td>Ustawienie</td></tr>
+                            <tr><td class="mono">generator-dev</td><td>Czy w generatorze stylów jest włączony tryb deweloperski.</td><td>Ustawienie</td></tr>
+                            <tr><td class="mono">generator-widgets</td><td>Widżety wybrane do podglądu w generatorze stylów.</td><td>Ustawienie</td></tr>
+                            <tr><td class="mono">stylownik</td><td>Ostatnio oglądany styl i tryb w stylowniku.</td><td>Ustawienie</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="prose">
+                    <p>Ustawienia generatora stylów są też zapisywane w adresie strony (po znaku <span class="mono">#</span>).
+                    Ta część adresu nie jest wysyłana na serwer. Pliki .css i .md z generatora powstają w całości w Twojej przeglądarce.</p>
+                </div>
+            </article>
+
+            <article class="panel span-12 materialize" style="--i:7">
+                <div class="card-head"><h2>Usługi zewnętrzne</h2></div>
+                <div class="prose">
+                    <h3>GitHub Pages — hosting</h3>
+                    <p>Strona jest udostępniana przez GitHub Pages (GitHub, Inc.). Jak każdy serwer, GitHub przetwarza dane techniczne
+                    żądania — m.in. adres IP i informacje o przeglądarce — aby wyświetlić stronę i chronić usługę przed nadużyciami.
+                    Nie mam dostępu do tych danych. Szczegóły: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">polityka prywatności GitHub</a>.</p>
+
+                    <h3>Google Fonts — czcionki</h3>
+                    <p>Tylko jeśli wybierzesz „Akceptuj czcionki Google”, strona pobiera kroje pisma z serwerów Google
+                    (fonts.googleapis.com i fonts.gstatic.com). Google otrzymuje wtedy Twój adres IP i informacje o przeglądarce.
+                    Przy wyborze „Tylko niezbędne” strona w ogóle nie łączy się z Google, a tekst wyświetla się fontami systemowymi —
+                    w katalogu stylów miniatury pokażą wtedy zastępcze kroje. Szczegóły: <a href="https://policies.google.com/privacy">polityka prywatności Google</a>.</p>
+
+                    <h3>Linki do innych serwisów</h3>
+                    <p>Linki, np. do GitHuba, prowadzą do zewnętrznych stron, które mają własne zasady prywatności.</p>
+                </div>
+            </article>
+
+            <article class="panel span-12 materialize" style="--i:8">
+                <div class="card-head"><h2>Twoje prawa i ustawienia</h2></div>
+                <div class="prose">
+                    <p>Zgodę na czcionki Google możesz w każdej chwili zmienić przyciskiem <b>„Zmień ustawienia prywatności”</b>
+                    na górze tej strony lub w stopce. Wszystkie zapisane ustawienia usuniesz, czyszcząc dane witryny w ustawieniach przeglądarki.</p>
+                    <p>Ponieważ nie zbieram Twoich danych osobowych, nie przechowuję niczego, co mógłbym udostępnić lub usunąć na Twoje żądanie.
+                    W sprawie danych przetwarzanych przez GitHub lub Google zwróć się do tych firm. Masz też prawo złożyć skargę do
+                    Prezesa Urzędu Ochrony Danych Osobowych (<a href="https://uodo.gov.pl">uodo.gov.pl</a>).</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer wrap">
+        <div class="footer-inner">
+            <a class="brand" href="index.html">
+                <span class="brand-mark" aria-hidden="true">r</span>
+                <span>rafal13381</span>
+            </a>
+            <nav class="footer-links" aria-label="Stopka">
+                <a href="index.html">Start</a>
+                <a href="kliker.html">Kliker</a>
+                <a href="style.html">Style</a>
+                <a href="https://github.com/rafal13381">GitHub</a>
+                <a href="prywatnosc.html">Prywatność i cookies</a>
+                <button class="footer-btn" type="button" data-consent-open>Ustawienia prywatności</button>
+            </nav>
+            <p class="footer-copy">© 2026 rafal13381 · Programista Full Stack</p>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>
+        // aktualny wybór pokazany obok przycisku
+        (function () {
+            function show() {
+                var v = window.Consent && Consent.get();
+                document.getElementById("consentState").textContent =
+                    v === "all" ? "Obecnie: czcionki Google włączone" : v === "necessary" ? "Obecnie: tylko niezbędne" : "Nie dokonano wyboru";
+            }
+            document.addEventListener("DOMContentLoaded", show);
+            if (window.Consent) Consent.onChange(show);
+        })();
+    </script>
+</body>
+</html>
