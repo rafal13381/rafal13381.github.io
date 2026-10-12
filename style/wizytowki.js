@@ -18,7 +18,15 @@
         check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
         star: '<path d="m12 3 2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z"/>',
         menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
-        arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>'
+        arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+        scissors: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/>',
+        wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/>',
+        utensils: '<path d="M3 2v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3zm0 0v7"/>',
+        paw: '<circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.05Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10z"/>',
+        languages: '<path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/>',
+        bed: '<path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>',
+        calculator: '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M16 14v4M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/>',
+        hammer: '<path d="m15 12-8.4 8.4a2.1 2.1 0 1 1-3-3L12 9M18 15l4-4M21.5 11.5l-1.9-1.9A2 2 0 0 1 19 8.2V7l-2.3-2.3a6 6 0 0 0-4.2-1.7H9l.9.8A6.2 6.2 0 0 1 12 8.4V10l2 2h1.2a2 2 0 0 1 1.4.6l1.9 1.9"/>'
     };
     function icon(name, cls) {
         return '<svg class="' + (cls || "wz-ico") + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + "</svg>";
@@ -244,6 +252,221 @@
                     ] },
                 { type: "contact", id: "kontakt", eyebrow: "Zamów", title: "Zamów bukiet", lead: "Napisz okazję, budżet i adres. Zadzwonimy, żeby potwierdzić szczegóły.",
                     address: "ul. Przykładowa 17, 15-007 Białystok", phone: "+48 123 456 789", hours: HOURS_SHOP, form: "Złóż zamówienie" }
+            ]
+        },
+        {
+            id: "fryzjer", label: "Fryzjer i barber", icon: "scissors", name: "Brzytwa & Grzebień", domain: "brzytwa-grzebien.example",
+            nav: [["cennik", "Cennik"], ["barberzy", "Barberzy"], ["opinie", "Opinie"], ["kontakt", "Rezerwacja"]],
+            hero: {
+                layout: "split", eyebrow: "Barber shop · strzyżenie i broda",
+                title: "Dobre cięcie, gorący ręcznik i kawa w cenie",
+                lead: "Strzyżemy klasycznie i nowocześnie, golimy brzytwą i doradzamy, jak dbać o fryzurę na co dzień. Rezerwacja online w minutę.",
+                cta: ["kontakt", "Zarezerwuj wizytę"], cta2: ["cennik", "Cennik"],
+                facts: [["45 min", "średnia wizyta"], ["4", "barberów"], ["7 dni", "w tygodniu"]]
+            },
+            sections: [
+                { type: "services", variant: "menu", id: "cennik", eyebrow: "Cennik", title: "Usługi i ceny", lead: "Do każdej usługi myjemy włosy i doradzamy w stylizacji.",
+                    groups: [
+                        ["Włosy", [["Strzyżenie męskie", "Nożyczki i maszynka, stylizacja", "70 zł"], ["Strzyżenie maszynką", "Jedna długość na całej głowie", "45 zł"], ["Strzyżenie dziecięce", "Do 12 lat", "50 zł"]]],
+                        ["Broda", [["Trymowanie brody", "Konturowanie, olejek", "50 zł"], ["Golenie brzytwą", "Gorący ręcznik, balsam", "70 zł"], ["Combo: włosy i broda", "Pełna usługa, ok. 75 minut", "110 zł"]]]
+                    ] },
+                { type: "team", id: "barberzy", eyebrow: "Barberzy", title: "Wybierz swojego barbera",
+                    items: [["Kuba Szpak", "fade i krótkie cięcia"], ["Oskar Lin", "długie włosy, styl klasyczny"], ["Daria Sęk", "broda i golenie brzytwą"], ["Igor Wąs", "strzyżenie dzieci"]] },
+                { type: "reviews", id: "opinie", eyebrow: "Opinie", title: "Wychodzą zadowoleni", score: "4,9", count: 512,
+                    items: [
+                        ["Najrówniejszy fade, jaki miałem. Kuba pamiętał, jak strzygłem się miesiąc temu, i od razu wiedział, co poprawić.", "Bartek S.", "stały klient", 5, "wrzesień 2026"],
+                        ["Pierwszy raz golenie brzytwą — gorący ręcznik i zero podrażnień. Rezerwacja przez stronę zajęła chwilę.", "Mateusz L.", "golenie brzytwą", 5, "sierpień 2026"],
+                        ["Bardzo dobre strzyżenie, miła atmosfera. W sobotę opóźnienie wyniosło kwadrans, ale dostałem kawę i przeprosiny.", "Adrian K.", "strzyżenie i broda", 4, "lipiec 2026"]
+                    ] },
+                { type: "contact", id: "kontakt", eyebrow: "Rezerwacja", title: "Zarezerwuj termin", lead: "Napisz, na kiedy i do którego barbera — potwierdzimy SMS-em w ciągu godziny.",
+                    address: "ul. Przykładowa 9, 15-008 Białystok", phone: "+48 123 456 789", hours: [["Poniedziałek – piątek", "9:00 – 20:00"], ["Sobota", "9:00 – 16:00"], ["Niedziela", "10:00 – 14:00"]], form: "Poproś o termin" }
+            ]
+        },
+        {
+            id: "mechanik", label: "Warsztat samochodowy", icon: "wrench", name: "Auto Serwis Tłok", domain: "auto-serwis-tlok.example",
+            nav: [["uslugi", "Usługi"], ["proces", "Jak działamy"], ["opinie", "Opinie"], ["kontakt", "Kontakt"]],
+            hero: {
+                layout: "cover", eyebrow: "Mechanika · diagnostyka · klimatyzacja",
+                title: "Naprawiamy uczciwie: najpierw diagnoza i wycena, potem praca",
+                lead: "Serwisujemy samochody osobowe i dostawcze wszystkich marek. Zdjęcia wymienionych części dostajesz na telefon.",
+                cta: ["kontakt", "Umów przegląd"], cta2: ["uslugi", "Zakres usług"],
+                facts: [["25 lat", "doświadczenia"], ["12 mies.", "gwarancji na naprawy"], ["1 dzień", "większość napraw"]]
+            },
+            sections: [
+                { type: "services", variant: "cards", id: "uslugi", eyebrow: "Usługi", title: "Co robimy na co dzień",
+                    items: [["Przegląd okresowy", "Wymiana oleju i filtrów, kontrola 40 punktów, wpis do książki serwisowej.", "od 290 zł"], ["Diagnostyka komputerowa", "Odczyt błędów i test jazdy z mechanikiem.", "120 zł"], ["Hamulce i zawieszenie", "Klocki, tarcze, amortyzatory, geometria kół.", "wycena po diagnozie"], ["Klimatyzacja", "Odgrzybianie, nabicie czynnika, test szczelności.", "od 199 zł"]] },
+                { type: "steps", id: "proces", eyebrow: "Jak działamy", title: "Bez niespodzianek na fakturze",
+                    items: [["Zgłoszenie", "Opisz objawy — umówimy termin, zwykle w ciągu 2 dni."], ["Diagnoza", "Sprawdzamy auto i dzwonimy z wyceną przed naprawą."], ["Naprawa", "Pracujemy tylko w zakresie, który zaakceptujesz."], ["Odbiór", "Pokazujemy wymienione części i dajemy 12 miesięcy gwarancji."]] },
+                { type: "reviews", id: "opinie", eyebrow: "Opinie", title: "Kierowcy nam ufają", score: "4,8", count: 274,
+                    items: [
+                        ["Inny warsztat chciał wymieniać sprzęgło. Tutaj znaleźli tani czujnik za 180 zł i auto jeździ od pół roku.", "Grzegorz N.", "diagnostyka", 5, "wrzesień 2026"],
+                        ["Dostałam zdjęcia starych klocków i tarcz na telefon — pierwszy raz rozumiałam, za co płacę.", "Monika F.", "hamulce", 5, "lipiec 2026"],
+                        ["Rzetelna robota i dobra cena. Na wolny termin czekałem cztery dni, więc lepiej dzwonić z wyprzedzeniem.", "Sławomir P.", "przegląd okresowy", 4, "czerwiec 2026"]
+                    ] },
+                { type: "contact", id: "kontakt", eyebrow: "Kontakt", title: "Umów wizytę w serwisie", lead: "Podaj markę, model i krótko opisz problem. Oddzwonimy z terminem.",
+                    address: "ul. Przykładowa 44, 15-009 Białystok", phone: "+48 123 456 789", hours: [["Poniedziałek – piątek", "7:30 – 17:30"], ["Sobota", "8:00 – 13:00"], ["Niedziela", "nieczynne"]], form: "Wyślij zgłoszenie" }
+            ]
+        },
+        {
+            id: "restauracja", label: "Restauracja", icon: "utensils", name: "Bistro Pod Lipą", domain: "bistro-pod-lipa.example",
+            nav: [["karta", "Karta"], ["sala", "Sala"], ["opinie", "Opinie"], ["kontakt", "Rezerwacja"]],
+            hero: {
+                layout: "center", eyebrow: "Kuchnia sezonowa · lunch i kolacje",
+                title: "Lokalne produkty, krótka karta i stół, przy którym się nie spieszysz",
+                lead: "Gotujemy z tego, co przywożą rolnicy z Podlasia. Karta zmienia się co miesiąc, a lunch dnia — codziennie.",
+                cta: ["kontakt", "Zarezerwuj stolik"], cta2: ["karta", "Zobacz kartę"],
+                facts: [["30 km", "od pola do talerza"], ["48", "miejsc na sali"], ["39 zł", "lunch dnia"]]
+            },
+            sections: [
+                { type: "services", variant: "menu", id: "karta", eyebrow: "Karta", title: "Październik w kuchni", lead: "Dania bezglutenowe i wegańskie oznaczamy w karcie na miejscu.",
+                    groups: [
+                        ["Przystawki i zupy", [["Krem z dyni", "Pestki, olej z czarnuszki", "24 zł"], ["Tatar z buraka", "Kozi ser, orzechy włoskie", "32 zł"], ["Pierogi z kaszanką", "Cebula, jabłko", "34 zł"]]],
+                        ["Dania główne", [["Pierś z kaczki", "Puree z selera, sos wiśniowy", "68 zł"], ["Sandacz", "Kasza pęczak, masło koperkowe", "62 zł"], ["Gołąbki z kaszą", "Sos grzybowy (wege)", "44 zł"]]]
+                    ] },
+                { type: "gallery", id: "sala", eyebrow: "Sala", title: "Ciepło, drewno i światło świec", items: ["Sala główna", "Kuchnia otwarta", "Taras pod lipą", "Stół degustacyjny"] },
+                { type: "reviews", id: "opinie", eyebrow: "Opinie", title: "Goście wracają na kolejne sezony", score: "4,7", count: 689,
+                    items: [
+                        ["Kaczka z sosem wiśniowym — najlepsze danie, jakie jadłam w tym roku. Obsługa doradziła świetne wino.", "Alicja M.", "kolacja we dwoje", 5, "wrzesień 2026"],
+                        ["Chodzimy z zespołem na lunch dnia. Szybko, sycąco i za każdym razem coś innego.", "Rafał G.", "lunch firmowy", 5, "wrzesień 2026"],
+                        ["Bardzo smaczne jedzenie i piękny taras. W piątek wieczorem kuchnia była przeciążona i czekaliśmy dłużej na drugie danie.", "Piotr i Ania", "kolacja w piątek", 4, "sierpień 2026"]
+                    ] },
+                { type: "contact", id: "kontakt", eyebrow: "Rezerwacja", title: "Zarezerwuj stolik", lead: "Podaj dzień, godzinę i liczbę osób. Grupy powyżej 8 osób prosimy o telefon.",
+                    address: "ul. Przykładowa 2, 15-010 Białystok", phone: "+48 123 456 789", hours: [["Wtorek – piątek", "12:00 – 22:00"], ["Sobota – niedziela", "13:00 – 22:00"], ["Poniedziałek", "nieczynne"]], form: "Zarezerwuj" }
+            ]
+        },
+        {
+            id: "weterynarz", label: "Gabinet weterynaryjny", icon: "paw", name: "Przychodnia Łapka", domain: "przychodnia-lapka.example",
+            nav: [["uslugi", "Usługi"], ["o-nas", "Przychodnia"], ["zespol", "Lekarze"], ["kontakt", "Kontakt"]],
+            hero: {
+                layout: "split", eyebrow: "Przychodnia dla psów, kotów i małych zwierząt",
+                title: "Spokojna wizyta dla Twojego zwierzaka — i dla Ciebie",
+                lead: "Osobne poczekalnie dla psów i kotów, bez pośpiechu i z jasnym planem leczenia. W nagłych przypadkach przyjmujemy bez kolejki.",
+                cta: ["kontakt", "Umów wizytę"], cta2: ["uslugi", "Usługi"],
+                facts: [["2", "osobne poczekalnie"], ["5", "lekarzy"], ["24/7", "dyżur telefoniczny"]]
+            },
+            sections: [
+                { type: "services", variant: "cards", id: "uslugi", eyebrow: "Usługi", title: "Opieka od szczeniaka do seniora",
+                    items: [["Profilaktyka", "Szczepienia, odrobaczanie, czipowanie i paszport.", "od 80 zł"], ["Diagnostyka", "USG, RTG cyfrowe i badania krwi na miejscu.", "od 120 zł"], ["Chirurgia", "Kastracje, zabiegi tkanek miękkich, stomatologia.", "wycena po konsultacji"], ["Wizyty domowe", "Dla zwierząt starszych i bardzo zestresowanych.", "od 180 zł"]] },
+                { type: "about", id: "o-nas", eyebrow: "Przychodnia", title: "Mniej stresu, więcej czasu",
+                    text: "Wizyty planujemy co 30 minut, żeby nikt nie czekał w tłoku. Koty mają własną poczekalnię i gabinet z feromonami, a psy dostają smaczki za odwagę.",
+                    points: ["Gabinet przyjazny kotom", "Wyniki badań tego samego dnia", "Przypomnienia o szczepieniach SMS", "Płatność kartą i BLIK"],
+                    stats: [["6 000", "pacjentów pod opieką"], ["30 min", "na każdą wizytę"]] },
+                { type: "team", id: "zespol", eyebrow: "Lekarze", title: "Nasz zespół",
+                    items: [["lek. wet. Ola Mróz", "choroby wewnętrzne"], ["lek. wet. Jan Bąk", "chirurgia"], ["lek. wet. Ewa Kruk", "koty i małe ssaki"]] },
+                { type: "reviews", id: "opinie", eyebrow: "Opinie", title: "Opiekunowie polecają", score: "4,9", count: 368,
+                    items: [
+                        ["Nasza kotka zwykle panikuje u weterynarza. Tu, w osobnym gabinecie, pierwszy raz dała się spokojnie zbadać.", "Weronika T.", "opiekunka kotki Mili", 5, "wrzesień 2026"],
+                        ["W niedzielę w nocy pies zjadł skarpetkę. Dyżurny lekarz oddzwonił w pięć minut i poprowadził nas do rana.", "Dawid C.", "nagły przypadek", 5, "sierpień 2026"],
+                        ["Bardzo dokładni lekarze, wszystko wytłumaczone. Ceny trochę wyższe niż gdzie indziej, ale warte tej opieki.", "Halina Z.", "opiekunka psa seniora", 4, "czerwiec 2026"]
+                    ] },
+                { type: "contact", id: "kontakt", eyebrow: "Kontakt", title: "Umów wizytę", lead: "Napisz, jakie zwierzę i co się dzieje. W nagłych przypadkach zadzwoń — telefon odbieramy całą dobę.",
+                    address: "ul. Przykładowa 15, 15-011 Białystok", phone: "+48 123 456 789", hours: [["Poniedziałek – piątek", "8:00 – 20:00"], ["Sobota", "9:00 – 15:00"], ["Niedziela", "dyżur telefoniczny"]], form: "Poproś o termin" }
+            ]
+        },
+        {
+            id: "szkola-jezykowa", label: "Szkoła językowa", icon: "languages", name: "Lingua Most", domain: "lingua-most.example",
+            nav: [["kursy", "Kursy"], ["grafik", "Grafik"], ["metoda", "Metoda"], ["kontakt", "Zapisy"]],
+            hero: {
+                layout: "center", eyebrow: "Angielski · hiszpański · niemiecki",
+                title: "Zacznij mówić od pierwszej lekcji, a nie po roku gramatyki",
+                lead: "Grupy do 6 osób, lektorzy z doświadczeniem za granicą i bezpłatny test poziomujący. Zajęcia stacjonarne i online.",
+                cta: ["kontakt", "Zapisz się na test"], cta2: ["kursy", "Kursy i ceny"],
+                facts: [["6", "osób w grupie"], ["A1–C1", "poziomy"], ["94%", "zdanych egzaminów"]]
+            },
+            sections: [
+                { type: "services", variant: "pricing", id: "kursy", eyebrow: "Kursy", title: "Wybierz tryb nauki",
+                    items: [["Grupa", "390 zł / mies.", ["2 × 90 min w tygodniu", "Do 6 osób na tym samym poziomie", "Materiały w cenie"]], ["Indywidualnie", "120 zł / 60 min", ["Program pod Twój cel", "Elastyczne terminy", "Online lub w szkole", "Raport postępów co miesiąc"], true], ["Egzamin", "1 490 zł / kurs", ["Przygotowanie do FCE, CAE, DELE", "Próbne egzaminy", "Konsultacje przed testem"]]] },
+                { type: "schedule", id: "grafik", eyebrow: "Grafik", title: "Grupy startujące w październiku",
+                    days: ["Pon", "Wt", "Śr", "Czw", "Pt"],
+                    rows: [["16:00", "Angielski A2", "Hiszpański A1", "Angielski A2", "Hiszpański A1", ""], ["17:45", "Angielski B1", "Niemiecki A1", "Angielski B1", "Niemiecki A1", "Konwersacje"], ["19:30", "Angielski B2", "Angielski C1", "Angielski B2", "Angielski C1", ""]] },
+                { type: "steps", id: "metoda", eyebrow: "Metoda", title: "Jak uczymy",
+                    items: [["Test", "20 minut rozmowy z lektorem i krótki test pisemny."], ["Plan", "Dobieramy grupę i cel: praca, podróże albo egzamin."], ["Mówienie", "70% zajęć to rozmowa w realnych sytuacjach."], ["Postęp", "Co miesiąc krótki raport i rozmowa o wynikach."]] },
+                { type: "reviews", id: "opinie", eyebrow: "Opinie", title: "Kursanci o nas", score: "4,9", count: 203,
+                    items: [
+                        ["Po trzech miesiącach przestałem bać się spotkań po angielsku w pracy. Lektorka ćwiczyła ze mną dokładnie te sytuacje.", "Tomasz B.", "angielski indywidualnie", 5, "wrzesień 2026"],
+                        ["Zdałam CAE z wynikiem A. Próbne egzaminy były trudniejsze niż prawdziwy — i bardzo dobrze.", "Julia K.", "kurs egzaminacyjny", 5, "lipiec 2026"],
+                        ["Świetna atmosfera w grupie i dużo mówienia. Wolałbym więcej terminów porannych.", "Marcin W.", "hiszpański A1", 4, "czerwiec 2026"]
+                    ] },
+                { type: "contact", id: "kontakt", eyebrow: "Zapisy", title: "Zapisz się na bezpłatny test", lead: "Podaj język i preferowane godziny — zaproponujemy termin testu w ciągu jednego dnia.",
+                    address: "ul. Przykładowa 27, 15-012 Białystok", phone: "+48 123 456 789", hours: [["Poniedziałek – piątek", "10:00 – 21:00"], ["Sobota", "9:00 – 14:00"], ["Niedziela", "nieczynne"]], form: "Zapisz mnie" }
+            ]
+        },
+        {
+            id: "pensjonat", label: "Pensjonat", icon: "bed", name: "Pensjonat Bory", domain: "pensjonat-bory.example",
+            nav: [["pokoje", "Pokoje"], ["galeria", "Okolica"], ["opinie", "Opinie"], ["kontakt", "Rezerwacja"]],
+            hero: {
+                layout: "cover", eyebrow: "Pensjonat na skraju Puszczy",
+                title: "Cisza, las za oknem i śniadania z lokalnych produktów",
+                lead: "Dziesięć pokoi w drewnianym domu, sauna, rowery dla gości i szlaki zaczynające się przy furtce.",
+                cta: ["kontakt", "Sprawdź dostępność"], cta2: ["pokoje", "Pokoje i ceny"],
+                facts: [["10", "pokoi"], ["200 m", "do lasu"], ["9,6", "ocena gości"]]
+            },
+            sections: [
+                { type: "services", variant: "pricing", id: "pokoje", eyebrow: "Pokoje", title: "Wybierz pokój",
+                    items: [["Pokój dwuosobowy", "320 zł / noc", ["Łóżko małżeńskie", "Łazienka z prysznicem", "Śniadanie w cenie"]], ["Apartament z kominkiem", "520 zł / noc", ["Do 4 osób", "Kominek i aneks kuchenny", "Taras z widokiem na las", "Śniadanie w cenie"], true], ["Pokój rodzinny", "420 zł / noc", ["Do 4 osób", "Dwa pomieszczenia", "Łóżeczko dla dziecka gratis"]]] },
+                { type: "gallery", id: "galeria", eyebrow: "Okolica", title: "Co czeka na miejscu", items: ["Ścieżka w puszczy", "Sauna w ogrodzie", "Jadalnia", "Pomost nad stawem", "Wypożyczalnia rowerów", "Ognisko wieczorem"] },
+                { type: "reviews", id: "opinie", eyebrow: "Opinie", title: "Goście wracają co roku", score: "4,8", count: 431,
+                    items: [
+                        ["Najlepiej przespany weekend od lat. Śniadania z serami od sąsiadów i jajecznicą na maśle — bajka.", "Kasia i Michał", "weekend we dwoje", 5, "wrzesień 2026"],
+                        ["Przyjechaliśmy z dziećmi i psem. Rowery, ognisko, staw — dzieci nie chciały wracać do miasta.", "Rodzina Lisów", "pobyt rodzinny", 5, "sierpień 2026"],
+                        ["Piękne miejsce i bardzo czysto. Zasięg telefonu słaby — dla jednych wada, dla nas zaleta.", "Andrzej O.", "tydzień urlopu", 4, "lipiec 2026"]
+                    ] },
+                { type: "contact", id: "kontakt", eyebrow: "Rezerwacja", title: "Zapytaj o wolny termin", lead: "Podaj daty przyjazdu i wyjazdu oraz liczbę osób. Odpowiemy z dostępnością i ceną za cały pobyt.",
+                    address: "Przykładowo 7, 17-000 Puszcza (fikcyjny adres)", phone: "+48 123 456 789", hours: [["Zameldowanie", "od 15:00"], ["Wymeldowanie", "do 11:00"], ["Recepcja", "8:00 – 21:00"]], form: "Sprawdź dostępność" }
+            ]
+        },
+        {
+            id: "biuro-rachunkowe", label: "Biuro rachunkowe", icon: "calculator", name: "Bilans Plus", domain: "bilans-plus.example",
+            nav: [["pakiety", "Pakiety"], ["proces", "Współpraca"], ["o-nas", "O biurze"], ["kontakt", "Kontakt"]],
+            hero: {
+                layout: "split", eyebrow: "Księgowość dla firm i jednoosobowych działalności",
+                title: "Ty prowadzisz firmę, my pilnujemy terminów i przepisów",
+                lead: "Księgi, kadry i płace, deklaracje i kontakt z urzędami. Dokumenty wysyłasz zdjęciem z telefonu, a wynik finansowy widzisz co miesiąc.",
+                cta: ["kontakt", "Poproś o wycenę"], cta2: ["pakiety", "Pakiety"],
+                facts: [["180", "firm pod opieką"], ["0", "kar za spóźnienia"], ["OC", "ubezpieczenie biura"]]
+            },
+            sections: [
+                { type: "services", variant: "pricing", id: "pakiety", eyebrow: "Pakiety", title: "Przejrzyste ceny miesięczne",
+                    items: [["Start", "250 zł / mies.", ["Ryczałt lub KPiR", "Do 20 dokumentów", "Deklaracje VAT i PIT"]], ["Firma", "490 zł / mies.", ["KPiR lub pełna księgowość", "Do 80 dokumentów", "Kadry do 3 osób", "Raport wyniku co miesiąc"], true], ["Spółka", "od 1 200 zł / mies.", ["Pełna księgowość", "Sprawozdanie finansowe", "Kadry i płace", "Stały opiekun"]]] },
+                { type: "steps", id: "proces", eyebrow: "Współpraca", title: "Przejście do nas w 4 krokach",
+                    items: [["Rozmowa", "Poznajemy formę działalności i liczbę dokumentów."], ["Umowa", "Stała cena miesięczna, bez ukrytych opłat."], ["Przejęcie", "Sami odbieramy dokumentację od poprzedniego biura."], ["Comiesięczny raport", "Podatki do zapłaty i wynik firmy w jednym mailu."]] },
+                { type: "about", id: "o-nas", eyebrow: "O biurze", title: "Księgowe, które odbierają telefon",
+                    text: "Biuro prowadzą biegłe księgowe z ponad 15-letnim doświadczeniem. Każda firma ma jedną stałą opiekunkę, która zna jej sprawy i odpowiada w ciągu jednego dnia roboczego.",
+                    points: ["Licencja Ministra Finansów", "Ubezpieczenie OC biura", "Elektroniczny obieg dokumentów", "Reprezentacja przed US i ZUS"] },
+                { type: "reviews", id: "opinie", eyebrow: "Opinie", title: "Przedsiębiorcy o nas", score: "5,0", count: 96,
+                    items: [
+                        ["Przeszedłem z innego biura w połowie roku i nie musiałem nic robić — dokumenty przejęli sami.", "Wojciech H.", "usługi IT, JDG", 5, "wrzesień 2026"],
+                        ["Comiesięczny raport z wynikiem i podatkami to coś, czego brakowało mi przez pięć lat działalności.", "Ilona S.", "sklep internetowy", 5, "lipiec 2026"],
+                        ["Pani Ewa wyjaśniła mi ulgę na start tak, że wreszcie zrozumiałam, ile zapłacę ZUS. Konkretnie i bez pośpiechu.", "Natalia R.", "gabinet kosmetyczny", 5, "maj 2026"]
+                    ] },
+                { type: "contact", id: "kontakt", eyebrow: "Kontakt", title: "Poproś o wycenę", lead: "Napisz, jaka to forma działalności i ile mniej więcej dokumentów miesięcznie. Wycena w 24 godziny.",
+                    address: "ul. Przykładowa 33/4, 15-013 Białystok", phone: "+48 123 456 789", hours: HOURS_OFFICE, form: "Poproś o wycenę" }
+            ]
+        },
+        {
+            id: "remonty", label: "Firma remontowa", icon: "hammer", name: "Fach Remonty", domain: "fach-remonty.example",
+            nav: [["uslugi", "Usługi"], ["realizacje", "Realizacje"], ["proces", "Proces"], ["kontakt", "Wycena"]],
+            hero: {
+                layout: "split", eyebrow: "Remonty mieszkań i domów pod klucz",
+                title: "Remont z terminem w umowie i jedną osobą do kontaktu",
+                lead: "Łazienki, kuchnie i całe mieszkania. Wycena po bezpłatnych oględzinach, a postęp prac widzisz na zdjęciach co tydzień.",
+                cta: ["kontakt", "Umów oględziny"], cta2: ["realizacje", "Realizacje"],
+                facts: [["320+", "zakończonych remontów"], ["5 lat", "gwarancji"], ["98%", "w terminie"]]
+            },
+            sections: [
+                { type: "services", variant: "cards", id: "uslugi", eyebrow: "Usługi", title: "Zakres prac",
+                    items: [["Łazienka pod klucz", "Hydraulika, płytki, zabudowa i biały montaż.", "od 1 400 zł / m²"], ["Kuchnia", "Instalacje, ściany, podłogi i montaż mebli.", "od 900 zł / m²"], ["Mieszkanie pod klucz", "Pełny remont z koordynacją wszystkich ekip.", "wycena po oględzinach"], ["Prace wykończeniowe", "Gładzie, malowanie, podłogi, drzwi.", "od 60 zł / m²"]] },
+                { type: "gallery", id: "realizacje", eyebrow: "Realizacje", title: "Ostatnio oddane", items: ["Łazienka 6 m²", "Kuchnia z wyspą", "Mieszkanie 48 m²", "Poddasze"] },
+                { type: "steps", id: "proces", eyebrow: "Proces", title: "Od oględzin do odbioru",
+                    items: [["Oględziny", "Bezpłatnie, z pomiarami i rozmową o budżecie."], ["Wycena i umowa", "Kosztorys pozycja po pozycji i termin zakończenia."], ["Realizacja", "Kierownik ekipy wysyła zdjęcia postępu co tydzień."], ["Odbiór", "Wspólny przegląd, protokół i 5 lat gwarancji."]] },
+                { type: "reviews", id: "opinie", eyebrow: "Opinie", title: "Zadowoleni klienci", score: "4,8", count: 157,
+                    items: [
+                        ["Remont łazienki skończony dzień przed terminem z umowy. Ekipa sprzątała po sobie codziennie.", "Ewelina D.", "łazienka 5 m²", 5, "wrzesień 2026"],
+                        ["Zdjęcia co piątek to świetny pomysł — byliśmy za granicą i wiedzieliśmy, co się dzieje w mieszkaniu.", "Paweł i Ola", "mieszkanie pod klucz", 5, "lipiec 2026"],
+                        ["Dobra jakość prac i uczciwa wycena. Na rozpoczęcie czekaliśmy sześć tygodni, bo mają pełny grafik.", "Ryszard J.", "kuchnia", 4, "czerwiec 2026"]
+                    ] },
+                { type: "contact", id: "kontakt", eyebrow: "Wycena", title: "Umów bezpłatne oględziny", lead: "Opisz krótko zakres i metraż. Zadzwonimy, żeby ustalić termin wizyty.",
+                    address: "ul. Przykładowa 50, 15-014 Białystok", phone: "+48 123 456 789", hours: HOURS_OFFICE, form: "Umów oględziny" }
             ]
         }
     ];

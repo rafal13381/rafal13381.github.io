@@ -126,7 +126,15 @@
         screen.classList.remove("is-swapping");
         $("wUrl").textContent = t.domain;
         $("wTitle").textContent = t.name;
-        Array.prototype.forEach.call($("wTemplates").children, function (b) { b.setAttribute("aria-pressed", b.dataset.t === state.t); });
+        var box = $("wTemplates");
+        Array.prototype.forEach.call(box.children, function (b) {
+            var on = b.dataset.t === state.t;
+            b.setAttribute("aria-pressed", on);
+            // zaznaczona branża zawsze widoczna w przewijanej liście (bez przewijania strony)
+            if (on && (b.offsetTop < box.scrollTop || b.offsetTop + b.offsetHeight > box.scrollTop + box.clientHeight)) {
+                box.scrollTop = b.offsetTop - box.clientHeight / 2 + b.offsetHeight / 2;
+            }
+        });
         paint();
     }
 
