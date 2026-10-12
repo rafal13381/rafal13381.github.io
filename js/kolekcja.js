@@ -1,6 +1,6 @@
 // Kolekcja rozszerzona: 100 stylów zapisanych jako „ziarna”.
 // Kolory: [tło, tekst, akcent, akcent 2] dla trybu jasnego i ciemnego.
-// Pozostałe tokeny (powierzchnie, ramki, cienie, kontrast) liczy style/tokens.js.
+// Pozostałe tokeny (powierzchnie, ramki, cienie, kontrast) liczy js/tokens.js.
 (function () {
     var list = [];
     function S(id, name, cat, material, shape, font, art, tagline, use, l, d) {

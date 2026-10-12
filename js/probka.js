@@ -1,4 +1,4 @@
-// Przykładowy interfejs renderowany w barwach dowolnego stylu (tokeny z style/tokens.js).
+// Przykładowy interfejs renderowany w barwach dowolnego stylu (tokeny z js/tokens.js).
 // Składa się z widżetów, które można włączać i wyłączać (Probka.setWidgets).
 (function (g) {
     function ico(d, extra) {

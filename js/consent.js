@@ -4,7 +4,7 @@
 (function () {
     var KEY = "consent";
     var listeners = [];
-    var root = document.currentScript && document.currentScript.src.replace(/consent\.js(\?.*)?$/, "") || "";
+    var root = document.currentScript && document.currentScript.src.replace(/js\/consent\.js(\?.*)?$/, "") || "";
 
     function get() {
         try {

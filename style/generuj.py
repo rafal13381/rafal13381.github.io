@@ -1,10 +1,10 @@
-# Buduje style/styles.js z plików .md w style/md.
+# Buduje js/styles.js z plików .md w style/md.
 # Kolekcję wyznacza stylownik podany w linii „Podgląd na żywo”,
 # tokeny pochodzą z sekcji „Zmienne CSS — gotowe do wklejenia”.
 # Uruchom z katalogu głównego strony: python3 style/generuj.py
 import re, json, os
 
-src, out = "style/md", "style/styles.js"
+src, out = "style/md", "js/styles.js"
 cols = [("stylownik.html", "Podstawowe"), ("stylownik-pro.html", "Pro")]
 # charakter powierzchni — nie da się go wiarygodnie wyczytać z tokenów
 MATERIAL = {

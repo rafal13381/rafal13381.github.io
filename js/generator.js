@@ -1,4 +1,4 @@
-// Generator stylów: ustawienia → ziarno → pełny styl (style/tokens.js) z podglądem, kontrastem i kodem CSS.
+// Generator stylów: ustawienia → ziarno → pełny styl (js/tokens.js) z podglądem, kontrastem i kodem CSS.
 (function () {
     var T = window.Tokens, UI = window.UI, ready = false;
     var state, mode, current, probka;
