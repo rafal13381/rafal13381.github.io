@@ -4,16 +4,18 @@ document.addEventListener("DOMContentLoaded", function () {
     var styles = T.all();
 
     // ---------- widoki ----------
-    var views = { katalog: document.getElementById("viewKatalog"), generator: document.getElementById("viewGenerator") };
-    var tabs = { katalog: document.getElementById("tabKatalog"), generator: document.getElementById("tabGenerator") };
+    var views = { katalog: document.getElementById("viewKatalog"), generator: document.getElementById("viewGenerator"), wizytowki: document.getElementById("viewWizytowki") };
+    var tabs = { katalog: document.getElementById("tabKatalog"), generator: document.getElementById("tabGenerator"), wizytowki: document.getElementById("tabWizytowki") };
     function route() {
-        var v = location.hash.split("?")[0] === "#generator" ? "generator" : "katalog";
+        var h = location.hash.split("?")[0].slice(1);
+        var v = views[h] ? h : "katalog";
         Object.keys(views).forEach(function (k) {
             views[k].hidden = k !== v;
             tabs[k].setAttribute("aria-selected", k === v);
             tabs[k].setAttribute("aria-pressed", k === v);
         });
         if (v === "generator" && window.Generator) window.Generator.show();
+        if (v === "wizytowki" && window.WizytowkiWidok) window.WizytowkiWidok.show();
     }
     window.addEventListener("hashchange", route);
     document.getElementById("totalCount").textContent = styles.length;

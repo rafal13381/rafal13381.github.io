@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         Array.prototype.forEach.call(document.getElementById("pMode").children, function (b) {
             b.setAttribute("aria-pressed", b.dataset.mode === mode);
         });
+        document.getElementById("pWz").href = "wizytowka.html?" + (fromGen ? "g=" + fromGen.code : "s=" + encodeURIComponent(st.id)) + "&m=" + mode;
         if (!fromGen) {
             prev.href = link(idx - 1);
             next.href = link(idx + 1);

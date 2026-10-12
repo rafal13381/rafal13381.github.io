@@ -4,18 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Style · rafal13381</title>
-    <meta name="description" content="Katalog 120 stylów interfejsu z filtrami kolorów, materiałów i typografii oraz generator własnych stylów z kontrolą kontrastu WCAG.">
+    <meta name="description" content="Katalog 120 stylów interfejsu z filtrami, generator własnych stylów z kontrolą kontrastu WCAG i przykładowe strony-wizytówki w każdym stylu.">
     <link rel="stylesheet" data-consent="fonts" data-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <script src="consent.js?v=20261011f"></script>
     <link rel="stylesheet" href="style.css?v=20261011f">
     <link rel="stylesheet" href="style/probka.css?v=20261011f">
+    <link rel="stylesheet" href="style/wizytowki.css?v=20261012e">
+    <link rel="stylesheet" href="style/wizytowki-ramka.css?v=20261012e">
     <script src="theme.js?v=20261011f"></script>
     <script src="style/styles.js?v=20261011f" defer></script>
     <script src="style/kolekcja.js?v=20261011f" defer></script>
-    <script src="style/tokens.js?v=20261011f" defer></script>
+    <script src="style/tokens.js?v=20261012e" defer></script>
     <script src="style/probka.js?v=20261011f" defer></script>
     <script src="style/ui.js?v=20261011f" defer></script>
-    <script src="script3.js?v=20261011f" defer></script>
+    <script src="style/wizytowki.js?v=20261012e" defer></script>
+    <script src="style/wizytowki-widok.js?v=20261012e" defer></script>
+    <script src="script3.js?v=20261012a" defer></script>
     <script src="style/generator.js?v=20261011f" defer></script>
 </head>
 <body>
@@ -45,6 +49,7 @@
             <div class="view-tabs seg materialize" style="--i:3" role="tablist" aria-label="Widok">
                 <a class="seg-btn" href="#katalog" role="tab" id="tabKatalog">Katalog <span class="seg-count" id="totalCount"></span></a>
                 <a class="seg-btn" href="#generator" role="tab" id="tabGenerator">Generator stylów</a>
+                <a class="seg-btn" href="#wizytowki" role="tab" id="tabWizytowki">Wizytówki</a>
             </div>
         </section>
 
@@ -204,6 +209,133 @@
                         <button class="seg-btn" type="button" data-tab="md" aria-pressed="false">Markdown</button>
                     </div>
                     <pre class="code"><code id="gCss"></code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------- wizytówki ---------- -->
+        <section class="gen" id="viewWizytowki" aria-labelledby="tabWizytowki" hidden>
+            <aside class="panel gen-controls">
+                <div class="card-head">
+                    <h2>Wizytówka</h2>
+                    <button class="btn btn-secondary btn-sm" id="wRandom" type="button">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+                        Losuj styl
+                    </button>
+                </div>
+                <p class="wz-side-note">Przykładowe strony firmowe w dowolnym stylu z katalogu. Firmy i dane są fikcyjne.</p>
+                <div class="field">
+                    <span id="wTemplatesLabel">Branża</span>
+                    <div class="wz-picks" id="wTemplates" role="group" aria-labelledby="wTemplatesLabel"></div>
+                </div>
+                <div class="field">
+                    <label for="wStyle">Styl</label>
+                    <div class="wz-style-row">
+                        <button class="icon-btn" id="wPrev" type="button" aria-label="Poprzedni styl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+                        <select class="input" id="wStyle"></select>
+                        <button class="icon-btn" id="wNext" type="button" aria-label="Następny styl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+                    </div>
+                    <small class="wz-style-note" id="wStyleNote"></small>
+                </div>
+                <div class="field">
+                    <span>Tryb</span>
+                    <div class="seg seg-fill" id="wMode" role="group" aria-label="Tryb wizytówki">
+                        <button class="seg-btn" type="button" data-mode="light" aria-pressed="true">Jasny</button>
+                        <button class="seg-btn" type="button" data-mode="dark" aria-pressed="false">Ciemny</button>
+                    </div>
+                </div>
+                <div class="field">
+                    <span>Ekran</span>
+                    <div class="seg seg-fill wz-seg3" id="wDevice" role="group" aria-label="Szerokość ekranu">
+                        <button class="seg-btn" type="button" data-device="desktop" aria-pressed="true">Komputer</button>
+                        <button class="seg-btn" type="button" data-device="tablet" aria-pressed="false">Tablet</button>
+                        <button class="seg-btn" type="button" data-device="phone" aria-pressed="false">Telefon</button>
+                    </div>
+                </div>
+                <div class="dev-toggle" id="wDevBox">
+                    <span class="dev-ico" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg>
+                    </span>
+                    <label class="dev-text" for="wDev">
+                        <b>Tryb deweloperski</b>
+                        <small id="wDevState">Wyłączony</small>
+                    </label>
+                    <button class="switch" id="wDev" type="button" role="switch" aria-checked="false" aria-describedby="wDevDesc"></button>
+                    <p class="dev-desc" id="wDevDesc">Włącz, aby pobrać wizytówkę jako gotową stronę .html, arkusz .css i opis .md dla AI.</p>
+                    <div class="dev-downloads" id="wDevDownloads" hidden>
+                        <button class="btn btn-primary btn-sm" type="button" data-download="html" aria-label="Pobierz stronę .html">Strona .html</button>
+                        <button class="btn btn-primary btn-sm" type="button" data-download="css" aria-label="Pobierz plik .css">Plik .css</button>
+                        <button class="btn btn-primary btn-sm" type="button" data-download="md" aria-label="Pobierz plik .md dla AI">Plik .md (AI)</button>
+                        <button class="btn btn-ghost btn-sm dev-jump" id="wDevJump" type="button">
+                            Zobacz kod i podgląd plików
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="wz-side-actions">
+                    <a class="btn btn-primary btn-sm btn-block" id="wFull" href="style/wizytowka.html">
+                        Otwórz na pełnym ekranie
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg>
+                    </a>
+                    <button class="btn btn-secondary btn-sm" id="wCopy" type="button">Kopiuj CSS</button>
+                    <a class="btn btn-secondary btn-sm" id="wPreview" href="style/podglad.html">Podgląd stylu</a>
+                </div>
+            </aside>
+
+            <div class="gen-out">
+                <div class="panel">
+                    <div class="card-head">
+                        <h2 id="wTitle">Wizytówka</h2>
+                        <span class="label">przewijaj wewnątrz okna</span>
+                    </div>
+                    <div class="wz-device" id="wDeviceFrame" data-device="desktop">
+                        <div class="wz-chrome" aria-hidden="true">
+                            <span class="wz-dots3"><i></i><i></i><i></i></span>
+                            <span class="wz-url" id="wUrl"></span>
+                        </div>
+                        <div class="wz-screen" id="wScreen" tabindex="0" role="region" aria-label="Podgląd wizytówki">
+                            <div id="wSite"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel dev-files" id="wDevPanel" hidden>
+                    <div class="card-head">
+                        <h2>Pliki dla programisty</h2>
+                        <span class="label">.html · .css · .md</span>
+                    </div>
+                    <p class="dev-note">
+                        Podgląd nie zapisuje projektu. <b>Żeby zachować wizytówkę, pobierz pliki</b> — strona .html działa od razu
+                        po otwarciu w przeglądarce, arkusz .css wklejasz do własnego projektu, a plik .md przekazujesz asystentowi AI
+                        jako opis treści, struktury i stylu.
+                    </p>
+                    <ul class="files">
+                        <li class="file">
+                            <span class="file-ico" aria-hidden="true">HTML</span>
+                            <span class="file-text"><b id="wHtmlName">wizytowka.html</b><small>Kompletna strona w jednym pliku: treść, style i skrypt</small></span>
+                            <button class="btn btn-secondary btn-sm" type="button" data-download="html">Pobierz</button>
+                        </li>
+                        <li class="file">
+                            <span class="file-ico" aria-hidden="true">CSS</span>
+                            <span class="file-text"><b id="wCssName">wizytowka.css</b><small>Tokeny stylu (jasny i ciemny) oraz style komponentów</small></span>
+                            <button class="btn btn-secondary btn-sm" type="button" data-download="css">Pobierz</button>
+                        </li>
+                        <li class="file">
+                            <span class="file-ico" aria-hidden="true">MD</span>
+                            <span class="file-text"><b id="wMdName">wizytowka.md</b><small>Struktura, treści, zasady budowy i opis stylu dla AI</small></span>
+                            <button class="btn btn-secondary btn-sm" type="button" data-download="md">Pobierz</button>
+                        </li>
+                    </ul>
+                    <div class="card-links dev-actions">
+                        <button class="btn btn-primary btn-sm" id="wDownloadAll" type="button">Pobierz wszystkie pliki</button>
+                        <button class="btn btn-secondary btn-sm" id="wCopyCode" type="button">Kopiuj widoczny kod</button>
+                        <button class="btn btn-ghost btn-sm" id="wLink" type="button">Kopiuj link</button>
+                    </div>
+                    <div class="seg code-tabs" id="wCodeTab" role="group" aria-label="Zawartość pliku">
+                        <button class="seg-btn" type="button" data-tab="html" aria-pressed="true">HTML</button>
+                        <button class="seg-btn" type="button" data-tab="css" aria-pressed="false">CSS</button>
+                        <button class="seg-btn" type="button" data-tab="md" aria-pressed="false">Markdown</button>
+                    </div>
+                    <pre class="code"><code id="wCode"></code></pre>
                 </div>
             </div>
         </section>

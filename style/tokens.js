@@ -527,7 +527,7 @@
         parse: parse, hex: hex, mix: mix, alpha: alpha, flat: flat, contrast: contrast, ensure: ensure,
         toHsl: toHsl, fromHsl: fromHsl, category: category,
         CATEGORIES: CATEGORIES, MATERIALS: MATERIALS, SHAPES: SHAPES, ARTS: ARTS, KINDS: KINDS, FONTS: FONTS,
-        expand: expand, normalize: normalize, apply: apply, toCSS: toCSS, toMarkdown: toMarkdown, families: families,
+        expand: expand, normalize: normalize, apply: apply, toCSS: toCSS, toMarkdown: toMarkdown, families: families, fontUrl: fontUrl,
         loadFonts: loadFonts, all: all, siteMode: siteMode, onSiteMode: onSiteMode
     };
 })(window);

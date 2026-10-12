@@ -1,0 +1,100 @@
+/* Ramka podglądu wizytówki (zakładka Wizytówki) i pasek sterowania na pełnym ekranie.
+   Nie trafia do plików eksportu — style samej strony są w wizytowki.css. */
+/* ---------- ramka podglądu (zakładka Wizytówki) ---------- */
+.wz-device {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--surface-2), 0 30px 60px -36px rgba(0,0,0,.45);
+  transition: max-width .45s cubic-bezier(.2,.9,.25,1);
+}
+.wz-device[data-device="tablet"] { max-width: 820px; }
+.wz-device[data-device="phone"] { max-width: 390px; border-radius: 34px; }
+.wz-chrome { display: flex; align-items: center; gap: 12px; padding: 10px 14px; }
+.wz-dots3 { display: flex; gap: 6px; flex: none; }
+.wz-dots3 i { width: 11px; height: 11px; border-radius: 50%; background: color-mix(in srgb, var(--muted) 45%, transparent); }
+.wz-url {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: var(--surface-raised, var(--surface));
+  color: var(--muted);
+  font: 500 13px/1.2 var(--font-body);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wz-device[data-device="phone"] .wz-dots3 { display: none; }
+.wz-screen {
+  height: min(76vh, 860px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  transition: opacity .18s ease;
+}
+.wz-screen.is-swapping { opacity: .35; }
+@media (prefers-reduced-motion: reduce) { .wz-device { transition: none; } }
+
+/* pełny ekran: style/wizytowka.html */
+.wz-page { margin: 0; }
+.wz-page .wz { min-height: 100vh; }
+.wz-dock {
+  position: fixed;
+  left: 50%;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: calc(100vw - 24px);
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(28, 28, 32, .72);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 20px 50px -18px rgba(0,0,0,.6);
+  color: #fff;
+  font: 600 14px/1.2 -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+  transform: translateX(-50%);
+  animation: wz-dock-in .5s cubic-bezier(.2,.9,.25,1) both;
+}
+@keyframes wz-dock-in { from { opacity: 0; transform: translate(-50%, 16px) scale(.96); } to { opacity: 1; transform: translateX(-50%); } }
+.wz-dock a, .wz-dock button, .wz-dock select {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .12s ease-out;
+}
+.wz-dock a:hover, .wz-dock button:hover, .wz-dock select:hover { background: rgba(255, 255, 255, .12); }
+.wz-dock a:active, .wz-dock button:active { transform: scale(.94); }
+.wz-dock :focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.wz-dock svg { width: 18px; height: 18px; flex: none; }
+.wz-dock select { -webkit-appearance: none; appearance: none; max-width: 200px; padding: 0 14px; background: rgba(255, 255, 255, .1); text-overflow: ellipsis; }
+.wz-dock select option, .wz-dock select optgroup { background: #1c1c20; color: #fff; }
+.wz-dock-sep { width: 1px; height: 22px; background: rgba(255, 255, 255, .18); }
+.wz-dock-name { max-width: 160px; overflow: hidden; text-overflow: ellipsis; }
+.wz-page .wz-foot { padding-bottom: 110px; }
+@media (max-width: 640px) {
+  .wz-dock-name, .wz-dock .wz-dock-hide { display: none; }
+  .wz-dock select { max-width: 130px; }
+}
+@media (prefers-reduced-motion: reduce) { .wz-dock { animation: none; } }
+@media (prefers-reduced-transparency: reduce) { .wz-dock { background: #1c1c20; -webkit-backdrop-filter: none; backdrop-filter: none; } }
