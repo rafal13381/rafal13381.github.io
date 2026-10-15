@@ -88,6 +88,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     document.getElementById("pCopy").addEventListener("click", function () { UI.copy(T.toCSS(st), "Skopiowano CSS stylu " + st.name); });
 
+    // ---------- tryb deweloperski: pliki dla programisty ----------
+    var DEV_KEY = "podglad-dev", dev = false, tab = "css";
+    var base = fromGen
+        ? (String(st.name).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ł/g, "l").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "styl")
+        : st.id;
+    function file(kind) { return kind === "md" ? T.toMarkdown(st) : T.toCSS(st); }
+    function download(kind) {
+        var blob = new Blob([file(kind)], { type: (kind === "md" ? "text/markdown" : "text/css") + ";charset=utf-8" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = base + "." + kind;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+        UI.toast("Pobrano " + a.download);
+    }
+    function showCode() {
+        document.getElementById("pCode").textContent = file(tab);
+        Array.prototype.forEach.call(document.getElementById("pCodeTab").children, function (b) { b.setAttribute("aria-pressed", b.dataset.tab === tab); });
+    }
+    // stan przełącznika zapamiętany w przeglądarce (klucz „podglad-dev”)
+    function setDev(on) {
+        dev = on;
+        document.getElementById("pDev").setAttribute("aria-checked", on);
+        document.getElementById("pDevBox").classList.toggle("is-on", on);
+        document.getElementById("pDevState").textContent = on ? "Włączony" : "Wyłączony";
+        document.getElementById("pDevDesc").textContent = on
+            ? "Pliki stylu są gotowe do pobrania poniżej, pod paletą."
+            : "Włącz, aby pobrać pliki dla programisty: arkusz CSS i opis stylu .md dla AI.";
+        document.getElementById("pDevPanel").hidden = !on;
+        document.getElementById("pCodePanel").hidden = on;
+        try { localStorage.setItem(DEV_KEY, on ? "1" : "0"); } catch (e) {}
+        if (on) showCode();
+    }
+    document.getElementById("pCssName").textContent = base + ".css";
+    document.getElementById("pMdName").textContent = base + ".md";
+    document.getElementById("pDev").addEventListener("click", function () { setDev(!dev); });
+    document.getElementById("pDevPanel").addEventListener("click", function (e) {
+        var b = e.target.closest("[data-download]");
+        if (b) download(b.dataset.download);
+    });
+    document.getElementById("pDownloadAll").addEventListener("click", function () {
+        download("css");
+        // drugie pobranie z opóźnieniem — część przeglądarek blokuje dwa naraz
+        setTimeout(function () { download("md"); }, 400);
+    });
+    document.getElementById("pCodeTab").addEventListener("click", function (e) {
+        var b = e.target.closest("button");
+        if (b) { tab = b.dataset.tab; showCode(); }
+    });
+    document.getElementById("pCopyCode").addEventListener("click", function () {
+        UI.copy(file(tab), tab === "md" ? "Skopiowano opis .md" : "Skopiowano CSS stylu " + st.name);
+    });
+    document.getElementById("pLink").addEventListener("click", function () { UI.copy(location.href, "Skopiowano link do stylu"); });
+    var saved = false;
+    try { saved = localStorage.getItem(DEV_KEY) === "1"; } catch (e) {}
+    setDev(saved);
+
     // ← → zmiana stylu, D przełącza tryb
     document.addEventListener("keydown", function (e) {
         if (e.target.closest("input, textarea, select") || e.metaKey || e.ctrlKey || e.altKey) return;

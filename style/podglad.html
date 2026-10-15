@@ -7,7 +7,7 @@
     <meta name="description" content="Podgląd stylu interfejsu na przykładowej aplikacji, z paletą, kontrastem i kodem CSS.">
     <link rel="stylesheet" data-consent="fonts" data-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <script src="../js/consent.js?v=20261011f"></script>
-    <link rel="stylesheet" href="../css/style.css?v=20261012f">
+    <link rel="stylesheet" href="../css/style.css?v=20261015a">
     <link rel="stylesheet" href="../css/probka.css?v=20261011f">
     <script src="../js/theme.js?v=20261011f"></script>
     <script src="../js/styles.js?v=20261011f" defer></script>
@@ -16,7 +16,7 @@
     <script src="../js/probka.js?v=20261011f" defer></script>
     <script src="../js/ui.js?v=20261011f" defer></script>
     <script src="../js/generator.js?v=20261011f" defer></script>
-    <script src="../js/podglad.js?v=20261012a" defer></script>
+    <script src="../js/podglad.js?v=20261015a" defer></script>
 </head>
 <body>
     <header class="nav wrap">
@@ -66,13 +66,58 @@
         <div class="pk-frame pk-frame-lg" id="pProbka"></div>
 
         <section class="grid preview-details">
+            <article class="panel span-12 dev-strip">
+                <div class="dev-toggle dev-toggle-wide" id="pDevBox">
+                    <span class="dev-ico" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg>
+                    </span>
+                    <label class="dev-text" for="pDev">
+                        <b>Tryb deweloperski</b>
+                        <small id="pDevState">Wyłączony</small>
+                    </label>
+                    <p class="dev-desc" id="pDevDesc">Włącz, aby pobrać pliki dla programisty: arkusz CSS i opis stylu .md dla AI.</p>
+                    <button class="switch" id="pDev" type="button" role="switch" aria-checked="false" aria-describedby="pDevDesc"></button>
+                </div>
+            </article>
             <article class="panel span-12">
                 <div class="card-head"><h2>Paleta</h2><span class="label">kliknij kolor, aby skopiować</span></div>
                 <div class="gen-palette" id="pPalette"></div>
             </article>
-            <article class="panel span-12">
+            <article class="panel span-12" id="pCodePanel">
                 <div class="card-head"><h2>Kod CSS</h2><span class="label">tryb jasny i ciemny</span></div>
                 <pre class="code"><code id="pCss"></code></pre>
+            </article>
+            <article class="panel span-12 dev-files" id="pDevPanel" hidden>
+                <div class="card-head">
+                    <h2>Pliki dla programisty</h2>
+                    <span class="label">.css · .md</span>
+                </div>
+                <p class="dev-note">
+                    <b>Żeby użyć stylu w projekcie, pobierz pliki</b> — arkusz CSS wklejasz do projektu,
+                    a plik .md przekazujesz asystentowi AI jako opis stylu: paletę, kontrast, typografię i zasady budowy komponentów.
+                </p>
+                <ul class="files">
+                    <li class="file">
+                        <span class="file-ico" aria-hidden="true">CSS</span>
+                        <span class="file-text"><b id="pCssName">styl.css</b><small>Zmienne CSS dla trybu jasnego i ciemnego</small></span>
+                        <button class="btn btn-secondary btn-sm" type="button" data-download="css">Pobierz</button>
+                    </li>
+                    <li class="file">
+                        <span class="file-ico" aria-hidden="true">MD</span>
+                        <span class="file-text"><b id="pMdName">styl.md</b><small>Opis stylu, paleta, kontrast i zasady dla AI</small></span>
+                        <button class="btn btn-secondary btn-sm" type="button" data-download="md">Pobierz</button>
+                    </li>
+                </ul>
+                <div class="card-links dev-actions">
+                    <button class="btn btn-primary btn-sm" id="pDownloadAll" type="button">Pobierz oba pliki</button>
+                    <button class="btn btn-secondary btn-sm" id="pCopyCode" type="button">Kopiuj widoczny kod</button>
+                    <button class="btn btn-ghost btn-sm" id="pLink" type="button">Kopiuj link</button>
+                </div>
+                <div class="seg code-tabs" id="pCodeTab" role="group" aria-label="Zawartość pliku">
+                    <button class="seg-btn" type="button" data-tab="css" aria-pressed="true">CSS</button>
+                    <button class="seg-btn" type="button" data-tab="md" aria-pressed="false">Markdown</button>
+                </div>
+                <pre class="code"><code id="pCode"></code></pre>
             </article>
         </section>
         <p class="empty" id="pMissing" hidden>Nie znaleziono takiego stylu. <a href="../style.html#katalog">Wróć do katalogu</a>.</p>

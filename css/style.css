@@ -854,6 +854,22 @@ select.input option, select.input optgroup { background: var(--bg); color: var(-
 .dev-downloads .btn { padding-left: 8px; padding-right: 8px; white-space: nowrap; }
 .dev-downloads .btn::before { content: "↓"; font-weight: 700; }
 .dev-jump { grid-column: 1 / -1; }
+/* wersja pozioma na stronie podglądu: ikona | tytuł i opis | przełącznik */
+.dev-strip { padding: 16px 20px; }
+.dev-toggle-wide {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "ico text sw" "ico desc sw";
+  gap: 2px 14px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.dev-toggle-wide.is-on { background: none; }
+.dev-toggle-wide .dev-ico { grid-area: ico; }
+.dev-toggle-wide .dev-text { grid-area: text; flex-direction: row; align-items: baseline; gap: 10px; }
+.dev-toggle-wide .dev-desc { grid-area: desc; }
+.dev-toggle-wide .switch { grid-area: sw; }
 .switch {
   position: relative;
   flex: none;
