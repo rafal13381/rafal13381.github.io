@@ -629,7 +629,30 @@
         root.dataset.template = t.id;
         root.innerHTML = markup(t);
         bind(root);
+        reveal(root, scroller(root));
         return t;
+    }
+
+    // tryb immersyjny (.has-bg3d): treść wyłania się z głębi, gdy wjeżdża na ekran.
+    // Samowystarczalna — trafia też do eksportowanego pliku .html.
+    function reveal(root, scrollRoot) {
+        if (!("IntersectionObserver" in window)) return;
+        if (root.__reveal) root.__reveal.disconnect();
+        var items = root.querySelectorAll(".wz-head, .wz-hero-copy, .wz-cover-card, .wz-card, .wz-art, .wz-facts > div, .wz-steps > li, .wz-team > *");
+        var io = root.__reveal = new IntersectionObserver(function (en) {
+            en.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                e.target.classList.add("is-in");
+                io.unobserve(e.target);
+            });
+        }, { root: scrollRoot || null, rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+        Array.prototype.forEach.call(items, function (el, i) {
+            el.classList.add("wz-rise");
+            // sąsiednie elementy z lekkim opóźnieniem — kaskada zamiast jednego skoku
+            el.style.setProperty("--rise-delay", (i % 4) * 70 + "ms");
+            io.observe(el);
+        });
+        root.classList.add("wz-reveal");
     }
 
     // ---------- interakcje wewnątrz wizytówki ----------
@@ -739,8 +762,13 @@
             "body { margin: 0; }\n.wz { min-height: 100vh; }\n\n" + componentCss.trim() + "\n";
     }
 
-    function html(id, st, componentCss) {
+    // bg: rodzaj tła 3D (js/scena3d.js) — w pliku canvas w hero + moduł three.js z CDN
+    function html(id, st, componentCss, bg) {
         var t = byId(id), T = window.Tokens, f = T.families(st);
+        var bgJs = bg && g.Scena3D ? g.Scena3D.bgCode(bg, st, t.icon) : "";
+        var bgItem = bgJs && g.Scena3D.bgKind(bg, st, t.icon).indexOf("item-") === 0;
+        var body = markup(t);
+        if (bgJs) body = '<div class="wz-stage" aria-hidden="true"><canvas class="wz-bg3d"></canvas></div>' + body;
         var desc = t.hero.lead;
         return "<!DOCTYPE html>\n" +
             '<html lang="pl">\n<head>\n' +
@@ -754,8 +782,10 @@
                 '    <link rel="stylesheet" href="' + T.fontUrl(f) + '">\n' : "") +
             "    <style>\n" + css(st, componentCss) + "    </style>\n" +
             "</head>\n<body>\n" +
-            '<div class="wz">\n' + markup(t).replace(/></g, ">\n<") + "\n</div>\n" +
-            "<script>\n(" + standalone.toString() + ")();\n</" + "script>\n" +
+            '<div class="wz' + (bgJs ? " has-bg3d" : "") + (bgItem ? " has-item3d" : "") + (st.depth && st.depth !== "none" ? " is-3d" : "") + '">\n' + body.replace(/></g, ">\n<") + "\n</div>\n" +
+            "<script>\n(" + standalone.toString() + ")();\n" +
+            (bgJs ? "(" + reveal.toString() + ")(document.querySelector(\".wz\"), null);\n" : "") + "</" + "script>\n" +
+            (bgJs ? '<script type="module">\n' + bgJs + "</" + "script>\n" : "") +
             "</body>\n</html>\n";
     }
 

@@ -1,5 +1,5 @@
 // Zakładka „Wizytówki” na stronie Style: wybór branży, stylu, trybu i szerokości ekranu.
-// Stan trzymany w adresie: #wizytowki?t=<szablon>&s=<styl>&m=light|dark&d=desktop|tablet|phone
+// Stan trzymany w adresie: #wizytowki?t=<szablon>&s=<styl>&m=light|dark&d=desktop|tablet|phone&b=<tło 3D>
 (function () {
     var T, UI, W, list, state, ready = false;
     var DEV_KEY = "wizytowki-dev", dev = false, tab = "html", cssCache = null;
@@ -13,7 +13,8 @@
             t: W.TEMPLATES.some(function (t) { return t.id === p.get("t"); }) ? p.get("t") : null,
             s: list.some(function (x) { return x.id === p.get("s"); }) ? p.get("s") : null,
             m: p.get("m") === "dark" || p.get("m") === "light" ? p.get("m") : null,
-            d: DEVICES.indexOf(p.get("d")) >= 0 ? p.get("d") : null
+            d: DEVICES.indexOf(p.get("d")) >= 0 ? p.get("d") : null,
+            b: window.Scena3D && Scena3D.validBg(p.get("b")) ? p.get("b") : null
         };
         return s;
     }
@@ -21,17 +22,19 @@
     function mode() { return state.m || T.siteMode(); }
 
     function save() {
-        var q = "#wizytowki?t=" + state.t + "&s=" + encodeURIComponent(state.s) + (state.m ? "&m=" + state.m : "") + (state.d !== "desktop" ? "&d=" + state.d : "");
+        var q = "#wizytowki?t=" + state.t + "&s=" + encodeURIComponent(state.s) + (state.m ? "&m=" + state.m : "") + (state.d !== "desktop" ? "&d=" + state.d : "") + (state.b !== "auto" ? "&b=" + state.b : "");
         try { history.replaceState(null, "", location.pathname + location.search + q); } catch (e) {}
     }
     function fullUrl() {
-        return "style/wizytowka.html?t=" + state.t + "&s=" + encodeURIComponent(state.s) + "&m=" + mode();
+        return "style/wizytowka.html?t=" + state.t + "&s=" + encodeURIComponent(state.s) + "&m=" + mode() + "&b=" + state.b;
     }
 
     function paint() {
         var st = style(), m = mode();
         T.apply($("wSite"), st, m);
         T.loadFonts(st);
+        if (window.Scena3D) Scena3D.attachBg($("wSite"), st, m, state.b, $("wScreen"));
+        $("wBg").value = state.b;
         Array.prototype.forEach.call($("wMode").children, function (b) { b.setAttribute("aria-pressed", b.dataset.mode === m); });
         $("wStyle").value = st.id;
         $("wStyleNote").textContent = st.tagline;
@@ -66,7 +69,7 @@
         var st = style();
         if (kind === "md") return W.files.md(state.t, st);
         if (kind === "css") return W.files.css(st, compCss);
-        return W.files.html(state.t, st, compCss);
+        return W.files.html(state.t, st, compCss, state.b);
     }
     var TYPES = { html: "text/html", css: "text/css", md: "text/markdown" };
     function withCss(kind) {
@@ -158,6 +161,24 @@
         state = fromHash();
         state.t = state.t || W.TEMPLATES[0].id;
         state.d = state.d || "desktop";
+        state.b = state.b || "auto";
+
+        // tło 3D: sceny abstrakcyjne albo przedmiot (branży lub dowolny z 16)
+        var bgSel = $("wBg");
+        if (window.Scena3D) {
+            [["Scena", Object.keys(Scena3D.BGS).filter(function (k) { return k !== "item"; })],
+                ["Przedmiot 3D", ["item"].concat(Object.keys(Scena3D.ITEMS).map(function (k) { return "item-" + k; }))]].forEach(function (gr) {
+                var og = UI.el("optgroup");
+                og.label = gr[0];
+                gr[1].forEach(function (k) {
+                    var o = UI.el("option", null, k === "item" ? "Przedmiot branży (dopasowany)" : Scena3D.bgLabel(k));
+                    o.value = k;
+                    og.appendChild(o);
+                });
+                bgSel.appendChild(og);
+            });
+        } else bgSel.closest(".field").hidden = true;
+        bgSel.addEventListener("change", function () { state.b = bgSel.value; paint(); });
         if (!state.s) state.s = list[Math.floor(Math.random() * list.length)].id;
 
         // branże
@@ -252,6 +273,7 @@
             var s = fromHash();
             if (s.s) state.s = s.s;
             if (s.m) state.m = s.m;
+            if (s.b) state.b = s.b;
             if (s.d && s.d !== state.d) setDevice(s.d);
             if (s.t && s.t !== state.t) setTemplate(s.t); else paint();
         }

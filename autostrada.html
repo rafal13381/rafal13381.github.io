@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autostrada · rafal13381</title>
+    <meta name="description" content="Autostrada — otwarty świat 3D w przeglądarce: jeździj po mieście, zbieraj monety, tankuj, wykonuj zlecenia i kupuj lepsze auta.">
+    <link rel="stylesheet" data-consent="fonts" data-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <script src="js/consent.js?v=20261011f"></script>
+    <link rel="stylesheet" href="css/style.css?v=20261023b">
+    <script src="js/theme.js?v=20261011f"></script>
+    <script src="js/vendor/three.min.js?v=r160" defer></script>
+    <script src="js/autostrada.js?v=20261023c" defer></script>
+</head>
+<body>
+    <header class="nav wrap">
+        <nav class="panel" aria-label="Główna">
+            <a class="brand" href="index.html">
+                <span class="brand-mark" aria-hidden="true">r</span>
+                <span>rafal13381</span>
+            </a>
+            <div class="tabs">
+                <a class="tab" href="index.html">Start</a>
+                <a class="tab" href="kliker.html">Kliker</a>
+                <a class="tab" href="autostrada.html" aria-current="page">Autostrada</a>
+                <a class="tab" href="style.html">Style</a>
+            </div>
+            <button class="icon-btn" id="themeToggle" type="button" aria-label="Motyw"></button>
+        </nav>
+    </header>
+
+    <main class="wrap game">
+        <section class="grid">
+            <article class="panel span-8 drive-panel materialize">
+                <div class="road-wrap" id="roadWrap">
+                    <canvas id="road" role="img" aria-label="Plansza gry: otwarty świat 3D z ulicami, ruchem ulicznym i stacjami paliw"></canvas>
+
+                    <div class="hud" aria-hidden="true">
+                        <div class="hud-chip hud-coins">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#F5C542"/><circle cx="12" cy="12" r="6" fill="none" stroke="#B8860B" stroke-width="1.6"/></svg>
+                            <b id="hCoins">0</b>
+                        </div>
+                        <div class="hud-speed"><b id="hSpeed">0</b><span>km/h</span></div>
+                        <div class="hud-bars">
+                            <div class="hud-bar"><span class="hud-bar-label">Paliwo</span><span class="hud-track"><i id="hFuelBar" class="is-fuel"></i></span></div>
+                            <div class="hud-bar"><span class="hud-bar-label">Uszkodzenia</span><span class="hud-track"><i id="hDmgBar" class="is-dmg"></i></span></div>
+                        </div>
+                    </div>
+                    <div class="hud-task" id="hTask" hidden></div>
+                    <canvas class="minimap" id="mini" aria-hidden="true"></canvas>
+                    <div class="hud-prompt" id="prompt" hidden></div>
+                    <div class="hud-msg" id="msg" role="status" aria-live="polite"></div>
+
+                    <div class="road-overlay" id="overlay">
+                        <div class="road-card">
+                            <span class="label">Otwarty świat</span>
+                            <h1 id="ovTitle">Autostrada</h1>
+                            <p id="ovText">Jeździj po mieście i okolicy, zbieraj monety, wykonuj zlecenia i tankuj na stacjach. Postęp zapisuje się w tej przeglądarce.</p>
+                            <button class="btn btn-primary btn-lg" id="startBtn" type="button">Ruszaj</button>
+                            <p class="road-keys"><kbd>W</kbd><kbd>S</kbd> gaz / hamulec · <kbd>A</kbd><kbd>D</kbd> skręt · <kbd>Spacja</kbd> ręczny · <kbd>E</kbd> akcja · <kbd>P</kbd> pauza</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="drive-controls" aria-label="Sterowanie">
+                    <button class="drive-btn" type="button" data-ctrl="left" aria-label="Skręć w lewo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+                    </button>
+                    <button class="drive-btn drive-wide" type="button" data-ctrl="brake">Hamuj</button>
+                    <button class="drive-btn drive-wide" type="button" data-ctrl="gas">Gaz</button>
+                    <button class="drive-btn" type="button" data-ctrl="right" aria-label="Skręć w prawo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+                    </button>
+                </div>
+            </article>
+
+            <aside class="span-4 drive-side">
+                <article class="panel materialize" style="--i:1">
+                    <div class="card-head">
+                        <h2>Portfel</h2>
+                        <button class="btn btn-secondary btn-sm" id="pauseBtn" type="button" disabled>Pauza</button>
+                    </div>
+                    <div class="drive-score"><span id="sCoins">0</span><small> monet</small></div>
+                    <div class="drive-stats">
+                        <span class="stat">Paliwo <b><span id="sFuel">0</span> L</b></span>
+                        <span class="stat warn">Uszkodzenia <b><span id="sDmg">0</span>%</b></span>
+                        <span class="stat">Przejechane <b><span id="sKm">0,0</span> km</b></span>
+                        <span class="stat on">Zlecenia <b id="sJobs">0</b></span>
+                    </div>
+                </article>
+
+                <article class="panel materialize" style="--i:2">
+                    <div class="card-head"><h2>Zlecenie</h2><span class="label" id="jobLabel">kurier</span></div>
+                    <p class="job-text" id="jobText">Odbierz zlecenie i dowieź paczkę na czas. Cel pokaże złota kolumna, strzałka nad autem i minimapa.</p>
+                    <div class="card-links">
+                        <button class="btn btn-primary btn-sm" id="jobBtn" type="button">Weź zlecenie</button>
+                    </div>
+                </article>
+
+                <article class="panel materialize" style="--i:3">
+                    <div class="card-head"><h2>Garaż</h2><span class="label">auta</span></div>
+                    <div class="rows shop" id="garage"></div>
+                </article>
+
+                <article class="panel materialize" style="--i:4">
+                    <div class="card-head"><h2>Mapy</h2><span class="label">światy</span></div>
+                    <div class="rows shop" id="maps"></div>
+                </article>
+
+                <article class="panel materialize" style="--i:5">
+                    <div class="card-head"><h2>Jak grać</h2></div>
+                    <ul class="bullets">
+                        <li><b>W</b>/<b>↑</b> gaz, <b>S</b>/<b>↓</b> hamulec i wsteczny, <b>A</b>/<b>D</b> skręt, <b>spacja</b> hamulec ręczny do driftu. Na telefonie użyj przycisków pod planszą.</li>
+                        <li>Paliwo ubywa w czasie jazdy. Tankuj na stacjach (zielone znaczniki na minimapie) albo zbieraj czerwone kanistry.</li>
+                        <li>Monety leżą na ulicach. Więcej zarobisz na zleceniach kurierskich.</li>
+                        <li>Zderzenia zwiększają uszkodzenia — naprawisz je na stacji. <b>E</b> wykonuje akcję z podpowiedzi, <b>R</b> wraca na najbliższą ulicę, <b>C</b> zmienia kamerę.</li>
+                        <li>Monety, auta, mapy, bak i pozycja zapisują się w tej przeglądarce.</li>
+                    </ul>
+                    <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">Zacznij od nowa</button>
+                </article>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="site-footer wrap">
+        <div class="footer-inner">
+            <a class="brand" href="index.html">
+                <span class="brand-mark" aria-hidden="true">r</span>
+                <span>rafal13381</span>
+            </a>
+            <nav class="footer-links" aria-label="Stopka">
+                <a href="index.html">Start</a>
+                <a href="kliker.html">Kliker</a>
+                <a href="autostrada.html">Autostrada</a>
+                <a href="style.html">Style</a>
+                <a href="https://github.com/rafal13381">GitHub</a>
+                <a href="prywatnosc.html">Prywatność i cookies</a>
+                <button class="footer-btn" type="button" data-consent-open>Ustawienia prywatności</button>
+            </nav>
+            <p class="footer-copy">© 2026 rafal13381 · Programista Full Stack</p>
+        </div>
+    </footer>
+</body>
+</html>

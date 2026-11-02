@@ -1,13 +1,18 @@
-// Kolekcja rozszerzona: 100 stylów zapisanych jako „ziarna”.
+// Kolekcja rozszerzona: 100 stylów + 10 stylów 3D zapisanych jako „ziarna”.
 // Kolory: [tło, tekst, akcent, akcent 2] dla trybu jasnego i ciemnego.
 // Pozostałe tokeny (powierzchnie, ramki, cienie, kontrast) liczy js/tokens.js.
 (function () {
     var list = [];
-    function S(id, name, cat, material, shape, font, art, tagline, use, l, d) {
+    function S(id, name, cat, material, shape, font, art, tagline, use, l, d, x) {
         list.push({
             id: id, name: name, cat: cat, material: material, shape: shape, font: font, art: art || null,
-            tagline: tagline, use: use, l: l.split(" "), d: d.split(" ")
+            tagline: tagline, use: use, l: l.split(" "), d: d.split(" "),
+            depth: x && x[0], scene: x && x[1], collection: x ? "3D" : null
         });
+    }
+    // styl 3D: dodatkowo głębia (soft | strong) i obiekt three.js w banerze
+    function S3(id, name, cat, material, shape, font, art, depth, scene, tagline, use, l, d) {
+        S(id, name, cat, material, shape, font, art, tagline, use, l, d, [depth, scene]);
     }
 
     // ---------- niebieskie ----------
@@ -127,6 +132,18 @@
     S("noir", "Noir", "neutralne", "flat", "sharp", "syne", "", "Film noir: czerń, biel i jedno światło reflektora.", "Kino, fotografia, portfolio artystyczne", "#F2F2F2 #0A0A0A #0A0A0A #B8860B", "#050505 #F2F2F2 #F2F2F2 #F2CF4A");
     S("chalk", "Chalk", "neutralne", "outline", "round", "nunito", "", "Kreda na tablicy: grafit, biel i ciepła żółć.", "Edukacja, kursy, tablice zadań", "#F7F7F5 #1D1F1E #2E3230 #B7791F", "#1F2422 #EDEFEA #EDEFEA #F2C66D");
     S("stealth", "Stealth", "neutralne", "neon", "sharp", "jetbrains", "glow", "Tryb niewidzialny: czerń, szarość i biały sygnał.", "Cyberbezpieczeństwo, VPN, narzędzia prywatności", "#F3F4F5 #0C0D0F #1F2328 #10B981", "#030405 #E6E8EB #F5F6F7 #34D399");
+
+    // ---------- 3D ----------
+    S3("clay-candy", "Clay Candy", "rozowe", "clay", "pill", "fredoka", "orbs", "soft", "orb", "Pastelowa plastelina: napompowane karty i cukierkowe kule.", "Aplikacje dla dzieci, gry casual, social", "#FCEFF5 #2A1520 #D63384 #4DABF7", "#1A0F16 #FBE6F0 #FF77B7 #74C0FC");
+    S3("iso-blocks", "Iso Blocks", "niebieskie", "extrude", "sharp", "grotesk", "cubes", "strong", "cubes", "Izometryczne klocki z wyraźną boczną ścianką.", "Narzędzia deweloperskie, gry logiczne, edukacja STEM", "#EEF3FF #0E1A33 #2F5BFF #FFB020", "#0A1022 #E6EDFF #7C9CFF #FFC857");
+    S3("chrome-bevel", "Chrome Bevel", "neutralne", "bevel", "soft", "inter", "", "soft", "knot", "Szczotkowany chrom, fazowane krawędzie i stalowy węzeł.", "Sprzęt audio, motoryzacja, gadżety premium", "#ECEEF1 #15171A #3A4250 #2F80ED", "#121418 #E8EBEF #C9D1DC #6FA8FF");
+    S3("hologram", "Hologram", "fioletowe", "glass", "round", "sora", "orbs", "strong", "crystal", "Opalizujące szkło i unoszący się kryształ.", "AI, Web3, aplikacje futurystyczne", "#F3EFFF #1A1233 #7B4DFF #00C2D1", "#080515 #EEE8FF #A98BFF #2FE6F2");
+    S3("voxel-garden", "Voxel Garden", "zielone", "extrude", "soft", "chakra", "cubes", "strong", "cubes", "Ogród z wokseli: zielone bloki i ziemista ścianka.", "Gry, sandboxy, aplikacje edukacyjne", "#F1F8EC #13240F #3E9A2A #C7792E", "#0C160A #E6F5DF #7FDC63 #F0A65E");
+    S3("terra-clay", "Terra Clay", "ziemiste", "clay", "round", "nunito", "orbs", "soft", "rings", "Ręcznie lepiona glina w ciepłych barwach ziemi.", "Rękodzieło, ceramika, sklepy z wnętrzami", "#F4EAE0 #2C1F17 #B4562E #5D8A7A", "#1E1610 #F3E6DA #EB8B60 #93C4B4");
+    S3("deep-sea", "Deep Sea", "turkusowe", "glass", "round", "manrope", "orbs", "strong", "orb", "Pęcherze powietrza w turkusowej głębinie.", "Muzyka, streaming, aplikacje relaksacyjne", "#E8F6F6 #0B2326 #0F8A8C #3D7BFF", "#031416 #DDF5F5 #2EE0D8 #6E9EFF");
+    S3("arcade-cabinet", "Arcade Cabinet", "czerwone", "bevel", "sharp", "chakra", "grid", "strong", "crystal", "Automat do gier: wypukłe przyciski i świecący kryształ.", "Gry retro, e-sport, kawiarnie z grami", "#FFF0EF #240A0C #E0262F #1E88E5", "#0E0405 #FFE5E6 #FF4D57 #4FB3FF");
+    S3("sunblock", "Sunblock", "zolte", "extrude", "soft", "bricolage", "dots", "strong", "knot", "Słoneczne bloki z grubą pomarańczową krawędzią.", "Kampanie, festiwale, marki młodzieżowe", "#FFF7E0 #1F1708 #E08A00 #3B5BDB", "#151006 #FFF2D6 #FFB224 #7C95FF");
+    S3("depth-grid", "Depth Grid", "niebieskie", "neon", "sharp", "jetbrains", "grid", "strong", "rings", "Neonowe pierścienie nad nieskończoną siatką.", "Cyberbezpieczeństwo, sci-fi, panele monitoringu", "#EEF4FF #0A1430 #0057FF #00D4FF", "#030818 #DCE8FF #3D8BFF #2CF0FF");
 
     window.SEEDS = list;
 })();

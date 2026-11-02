@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Style · rafal13381</title>
-    <meta name="description" content="Katalog 120 stylów interfejsu z filtrami, generator własnych stylów z kontrolą kontrastu WCAG i przykładowe strony-wizytówki w każdym stylu.">
+    <meta name="description" content="Katalog 130 stylów interfejsu (w tym 10 stylów 3D) z filtrami, generator własnych stylów 2D i 3D z kontrolą kontrastu WCAG i przykładowe strony-wizytówki w każdym stylu.">
     <link rel="stylesheet" data-consent="fonts" data-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <script src="js/consent.js?v=20261011f"></script>
-    <link rel="stylesheet" href="css/style.css?v=20261015a">
-    <link rel="stylesheet" href="css/probka.css?v=20261011f">
-    <link rel="stylesheet" href="css/wizytowki.css?v=20261012e">
+    <link rel="stylesheet" href="css/style.css?v=20261029a">
+    <link rel="stylesheet" href="css/probka.css?v=20261029a">
+    <link rel="stylesheet" href="css/wizytowki.css?v=20261029e">
     <link rel="stylesheet" href="css/wizytowki-ramka.css?v=20261012e">
     <script src="js/theme.js?v=20261011f"></script>
     <script src="js/styles.js?v=20261011f" defer></script>
-    <script src="js/kolekcja.js?v=20261011f" defer></script>
-    <script src="js/tokens.js?v=20261012e" defer></script>
-    <script src="js/probka.js?v=20261011f" defer></script>
+    <script src="js/kolekcja.js?v=20261029a" defer></script>
+    <script src="js/tokens.js?v=20261029a" defer></script>
+    <script src="js/probka.js?v=20261029a" defer></script>
     <script src="js/ui.js?v=20261011f" defer></script>
-    <script src="js/wizytowki.js?v=20261012f" defer></script>
-    <script src="js/wizytowki-widok.js?v=20261012f" defer></script>
-    <script src="js/script3.js?v=20261012a" defer></script>
-    <script src="js/generator.js?v=20261011f" defer></script>
+    <script src="js/wizytowki.js?v=20261029e" defer></script>
+    <script src="js/wizytowki-widok.js?v=20261029e" defer></script>
+    <script src="js/script3.js?v=20261029a" defer></script>
+    <script src="js/scena3d.js?v=20261029g" defer></script>
+    <script src="js/generator.js?v=20261029a" defer></script>
 </head>
 <body>
     <header class="nav wrap">
@@ -32,6 +33,7 @@
             <div class="tabs">
                 <a class="tab" href="index.html">Start</a>
                 <a class="tab" href="kliker.html">Kliker</a>
+                <a class="tab" href="autostrada.html">Autostrada</a>
                 <a class="tab" href="style.html" aria-current="page">Style</a>
             </div>
             <button class="icon-btn" id="themeToggle" type="button" aria-label="Motyw"></button>
@@ -92,6 +94,10 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
                         Losuj
                     </button>
+                    <button class="btn btn-secondary btn-sm" id="gRandom3d" type="button" title="Losowy styl 3D">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9zM12 12l8-4.5M12 12v9M12 12 4 7.5"/></svg>
+                        Losuj 3D
+                    </button>
                 </div>
                 <label class="field"><span>Nazwa stylu</span><input class="input" id="gName" maxlength="32" autocomplete="off"></label>
                 <div class="field">
@@ -129,6 +135,8 @@
                 <div class="field"><span>Kształt</span><div class="seg seg-fill" id="gShape" role="group" aria-label="Kształt"></div></div>
                 <label class="field"><span>Krój pisma</span><select class="input" id="gFont"></select></label>
                 <label class="field"><span>Tło dekoracyjne</span><select class="input" id="gArt"></select></label>
+                <div class="field"><span>Głębia 3D</span><div class="seg seg-fill" id="gDepth" role="group" aria-label="Głębia 3D"></div></div>
+                <label class="field"><span>Obiekt 3D w banerze</span><select class="input" id="gScene"></select></label>
                 <label class="check-row"><input type="checkbox" id="gHigh"><span class="box" aria-hidden="true"></span>Wysoki kontrast tekstu</label>
                 <div class="dev-toggle" id="gDevBox">
                     <span class="dev-ico" aria-hidden="true">
@@ -143,6 +151,7 @@
                     <div class="dev-downloads" id="gDevDownloads" hidden>
                         <button class="btn btn-primary btn-sm" type="button" data-download="css" aria-label="Pobierz plik .css">Plik .css</button>
                         <button class="btn btn-primary btn-sm" type="button" data-download="md" aria-label="Pobierz plik .md dla AI">Plik .md (AI)</button>
+                        <button class="btn btn-primary btn-sm" type="button" data-download="js" id="gDevJs" aria-label="Pobierz scenę 3D .js" hidden>Scena 3D .js</button>
                         <button class="btn btn-ghost btn-sm dev-jump" id="gDevJump" type="button">
                             Zobacz kod i podgląd plików
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
@@ -197,6 +206,11 @@
                             <span class="file-text"><b id="gMdName">styl.md</b><small>Opis stylu, paleta, kontrast i zasady dla AI</small></span>
                             <button class="btn btn-secondary btn-sm" id="gDownloadMd" type="button">Pobierz</button>
                         </li>
+                        <li class="file" id="gJsItem" hidden>
+                            <span class="file-ico" aria-hidden="true">JS</span>
+                            <span class="file-text"><b>scena-3d.js</b><small>Obiekt 3D (three.js) w kolorach stylu — moduł do wklejenia</small></span>
+                            <button class="btn btn-secondary btn-sm" id="gDownloadJs" type="button">Pobierz</button>
+                        </li>
                     </ul>
                     <div class="card-links dev-actions">
                         <button class="btn btn-primary btn-sm" id="gDownloadAll" type="button">Pobierz oba pliki</button>
@@ -207,6 +221,7 @@
                     <div class="seg code-tabs" id="gCodeTab" role="group" aria-label="Zawartość pliku">
                         <button class="seg-btn" type="button" data-tab="css" aria-pressed="true">CSS</button>
                         <button class="seg-btn" type="button" data-tab="md" aria-pressed="false">Markdown</button>
+                        <button class="seg-btn" type="button" data-tab="js" aria-pressed="false" id="gJsTab" hidden>Scena 3D</button>
                     </div>
                     <pre class="code"><code id="gCss"></code></pre>
                 </div>
@@ -244,6 +259,9 @@
                         <button class="seg-btn" type="button" data-mode="dark" aria-pressed="false">Ciemny</button>
                     </div>
                 </div>
+                <label class="field"><span>Tło 3D</span><select class="input" id="wBg"></select>
+                    <small class="wz-style-note">Scena three.js za całą stroną. Przedmiot 3D w nagłówku można złapać i zakręcić.</small>
+                </label>
                 <div class="field">
                     <span>Ekran</span>
                     <div class="seg seg-fill wz-seg3" id="wDevice" role="group" aria-label="Szerokość ekranu">
@@ -352,6 +370,7 @@
             <nav class="footer-links" aria-label="Stopka">
                 <a href="index.html">Start</a>
                 <a href="kliker.html">Kliker</a>
+                <a href="autostrada.html">Autostrada</a>
                 <a href="style.html">Style</a>
                 <a href="https://github.com/rafal13381">GitHub</a>
                 <a href="prywatnosc.html">Prywatność i cookies</a>

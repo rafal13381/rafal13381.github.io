@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function render() {
         T.apply(probka, st, mode);
+        if (window.Scena3D) Scena3D.attach(probka, st, mode);
         Array.prototype.forEach.call(document.getElementById("pMode").children, function (b) {
             b.setAttribute("aria-pressed", b.dataset.mode === mode);
         });

@@ -203,12 +203,42 @@
         setName(el, name);
         setWidgets(el, widgets);
         el.addEventListener("click", click);
+        tilt(el);
         el.addEventListener("input", function (e) {
             if (e.target.classList.contains("pk-range")) {
                 var o = e.target.closest(".pk-field").querySelector("[data-out]");
                 if (o) o.textContent = e.target.value + "%";
             }
         });
+    }
+
+    // głębia 3D: pozycja kursora na karcie (-1…1) trafia do --px/--py, kąt liczy css z --tilt
+    function tilt(el) {
+        var card = null, raf = 0, x = 0, y = 0;
+        function paint() {
+            raf = 0;
+            if (!card) return;
+            card.style.setProperty("--px", x.toFixed(3));
+            card.style.setProperty("--py", y.toFixed(3));
+        }
+        el.addEventListener("pointermove", function (e) {
+            if (!el.classList.contains("is-3d") || e.pointerType === "touch") return;
+            var c = e.target.closest(".pk-card, .pk-bar");
+            if (c !== card) leave();
+            card = c;
+            if (!card) return;
+            var r = card.getBoundingClientRect();
+            x = ((e.clientX - r.left) / r.width) * 2 - 1;
+            y = ((e.clientY - r.top) / r.height) * 2 - 1;
+            if (!raf) raf = requestAnimationFrame(paint);
+        });
+        function leave() {
+            if (!card) return;
+            card.style.removeProperty("--px");
+            card.style.removeProperty("--py");
+            card = null;
+        }
+        el.addEventListener("pointerleave", leave);
     }
 
     // proste interakcje, żeby próbka dała się „poklikać”

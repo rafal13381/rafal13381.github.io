@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { key: "material", title: "Charakter", options: Object.keys(T.MATERIALS).map(function (k) { return { v: k, label: T.MATERIALS[k] }; }) },
         { key: "shape", title: "Kształt", options: Object.keys(T.SHAPES).map(function (k) { return { v: k, label: T.SHAPES[k].label }; }) },
         { key: "kind", title: "Typografia", options: T.KINDS.map(function (k) { return { v: k, label: k }; }) },
-        { key: "collection", title: "Kolekcja", options: ["Podstawowe", "Pro", "Rozszerzone"].map(function (k) { return { v: k, label: k }; }) }
+        { key: "collection", title: "Kolekcja", options: ["Podstawowe", "Pro", "Rozszerzone", "3D"].map(function (k) { return { v: k, label: k }; }) }
     ];
     var active = {};
     FACETS.forEach(function (f) { active[f.key] = []; });

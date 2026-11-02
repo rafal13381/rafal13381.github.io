@@ -90,7 +90,8 @@
     ];
     var MATERIALS = {
         flat: "Płaski", glass: "Szkło", outline: "Kontur", soft: "Miękki",
-        brutal: "Brutalizm", paper: "Papier", neon: "Neon"
+        brutal: "Brutalizm", paper: "Papier", neon: "Neon",
+        clay: "Glina 3D", extrude: "Bryła 3D", bevel: "Faza 3D"
     };
     var SHAPES = {
         sharp: { label: "Ostre", radius: "4px", sm: "2px", btn: "2px" },
@@ -98,7 +99,15 @@
         round: { label: "Zaokrąglone", radius: "20px", sm: "12px", btn: "12px" },
         pill: { label: "Pigułki", radius: "28px", sm: "16px", btn: "999px" }
     };
-    var ARTS = { none: "Jednolite", blobs: "Mgła barw", glow: "Poświata", grid: "Siatka", dots: "Kropki", lines: "Linie" };
+    var ARTS = { none: "Jednolite", blobs: "Mgła barw", glow: "Poświata", grid: "Siatka", dots: "Kropki", lines: "Linie", orbs: "Kule 3D", cubes: "Sześciany 3D" };
+    // głębia: przechylenie kart za kursorem i uniesienie przy najechaniu
+    var DEPTHS = {
+        none: { label: "Płasko", tilt: "0deg", lift: "0px" },
+        soft: { label: "Subtelna", tilt: "4deg", lift: "6px" },
+        strong: { label: "Mocna", tilt: "10deg", lift: "14px" }
+    };
+    // obiekt three.js w banerze (js/scena3d.js)
+    var SCENES = { none: "Brak", orb: "Kula", knot: "Węzeł", crystal: "Kryształ", rings: "Pierścienie", cubes: "Klocki" };
     var KINDS = ["Bezszeryfowy", "Szeryfowy", "Monospace", "Ekspresyjny"];
 
     var SANS = 'system-ui, sans-serif', SERIF = 'Georgia, serif', MONO = 'ui-monospace, monospace';
@@ -205,6 +214,23 @@
                 return "radial-gradient(" + alpha(text, dark ? 0.18 : 0.16) + " 1px, transparent 1.6px) 0 0 / 18px 18px, " + bg;
             case "lines":
                 return "repeating-linear-gradient(0deg, " + alpha(text, dark ? 0.06 : 0.055) + " 0 1px, transparent 1px 32px), " + bg;
+            case "orbs":
+                // kule z odblaskiem: jasny punkt, kolor, cień po stronie odwrotnej do światła
+                return [[a1, "6% 10%", 220], [a2, "96% 18%", 150], [mix(a1, a2, 0.5), "72% 104%", 260]].map(function (o) {
+                    var k = dark ? 0.55 : 0.42;
+                    return "radial-gradient(circle at 34% 30%, " + alpha(WHITE, dark ? 0.35 : 0.6) + " 0, " + alpha(o[0], k) + " 24%, " +
+                        alpha(mix(o[0], BLACK, 0.5), k) + " 48%, transparent 50%) " + o[1] + " / " + o[2] + "px " + o[2] + "px no-repeat";
+                }).join(", ") + ", " + bg;
+            case "cubes":
+                // izometryczne sześciany: dwie ściany boczne + górna
+                var c1 = alpha(text, dark ? 0.07 : 0.05), c2 = alpha(a1, dark ? 0.12 : 0.08), sz = " / 56px 98px";
+                var side = function (deg, pos) {
+                    return "linear-gradient(" + deg + "deg, " + c1 + " 12%, transparent 12.5%, transparent 87%, " + c1 + " 87.5%, " + c1 + ") " + pos + sz;
+                };
+                var top = function (pos) {
+                    return "linear-gradient(60deg, " + c2 + " 25%, transparent 25.5%, transparent 75%, " + c2 + " 75%, " + c2 + ") " + pos + sz;
+                };
+                return [side(30, "0 0"), side(150, "0 0"), side(30, "28px 49px"), side(150, "28px 49px"), top("0 0"), top("28px 49px")].join(", ") + ", " + bg;
             default:
                 return bg;
         }
@@ -261,6 +287,39 @@
                 o.btn = "0 0 18px -2px " + alpha(accent, 0.7);
                 o.blur = "8px";
                 break;
+            case "clay":
+                // claymorphism: napompowana bryła — jasny wewnętrzny odblask u góry, cień u dołu
+                o.surface = dark ? mix(bg, text, 0.09) : mix(bg, WHITE, 0.62);
+                o.s2 = mix(bg, BLACK, dark ? 0.22 : 0.05);
+                o.border = "transparent";
+                o.card = "0 22px 40px -14px " + alpha(mix(text, accent, 0.35), dark ? 0.7 : 0.3) +
+                    ", inset 0 -10px 18px " + alpha(BLACK, dark ? 0.35 : 0.07) + ", inset 0 10px 18px " + alpha(WHITE, dark ? 0.07 : 0.95);
+                o.btn = "0 10px 20px -8px " + alpha(accent, 0.65) + ", inset 0 -5px 10px rgba(0,0,0,0.2), inset 0 5px 10px rgba(255,255,255,0.35)";
+                o.inset = "inset 0 4px 8px " + alpha(BLACK, dark ? 0.45 : 0.1);
+                break;
+            case "extrude":
+                // bryła wyciągnięta w głąb: kilka warstw twardego cienia tworzy boczną ściankę
+                var sideC = dark ? mix(accent, BLACK, 0.55) : mix(accent, BLACK, 0.25), layers = [];
+                for (var i = 1; i <= 7; i++) layers.push(i + "px " + i + "px 0 " + sideC);
+                o.surface = dark ? mix(bg, text, 0.07) : mix(bg, WHITE, 0.6);
+                o.s2 = alpha(text, dark ? 0.08 : 0.06);
+                o.border = sideC;
+                o.bw = "2px";
+                o.card = layers.join(", ") + ", 14px 18px 26px -6px " + alpha(BLACK, dark ? 0.6 : 0.25);
+                o.btn = "0 4px 0 " + mix(accent, BLACK, 0.4) + ", 0 10px 16px -8px " + alpha(accent, 0.6);
+                o.inset = "inset 2px 2px 0 " + alpha(text, 0.12);
+                break;
+            case "bevel":
+                // skeuomorfizm: fazowane krawędzie — światło od góry, cień przy dolnej krawędzi
+                o.surface = dark ? mix(bg, text, 0.09) : mix(bg, WHITE, 0.5);
+                o.s2 = mix(bg, dark ? WHITE : BLACK, dark ? 0.06 : 0.05);
+                o.border = mix(bg, text, dark ? 0.24 : 0.2);
+                o.card = "inset 0 -2px 0 " + alpha(BLACK, dark ? 0.5 : 0.08) + ", 0 2px 4px " + alpha(BLACK, dark ? 0.5 : 0.1) +
+                    ", 0 14px 28px -12px " + alpha(BLACK, dark ? 0.7 : 0.3);
+                o.edge = alpha(WHITE, dark ? 0.14 : 0.95);
+                o.btn = "inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -2px 0 rgba(0,0,0,0.25), 0 2px 4px " + alpha(BLACK, dark ? 0.5 : 0.22);
+                o.inset = "inset 0 2px 4px " + alpha(BLACK, dark ? 0.5 : 0.14);
+                break;
             default: // flat
                 o.surface = dark ? mix(bg, text, 0.06) : (lum(bg) > 0.9 ? WHITE : mix(bg, WHITE, 0.7));
                 o.border = mix(bg, text, dark ? 0.14 : 0.11);
@@ -296,16 +355,18 @@
 
     function expand(seed) {
         var font = FONTS[seed.font] || FONTS.inter, shape = SHAPES[seed.shape] || SHAPES.round;
-        var mat = seed.material || "flat", artKind = seed.art || (mat === "glass" ? "blobs" : mat === "neon" ? "grid" : "none");
+        var mat = seed.material || "flat", artKind = seed.art || (mat === "glass" ? "blobs" : mat === "neon" ? "grid" : mat === "clay" ? "orbs" : mat === "extrude" ? "cubes" : "none");
+        var depth = DEPTHS[seed.depth] ? seed.depth : "none";
         var st = {
             id: seed.id, name: seed.name, tagline: seed.tagline || "", use: seed.use || "",
             collection: seed.collection || "Rozszerzone", cat: seed.cat, material: mat, art: artKind,
-            fontKey: seed.font, seed: seed,
+            fontKey: seed.font, seed: seed, depth: depth, scene: SCENES[seed.scene] ? seed.scene : "none",
             shared: {
                 "--font-display": font.d, "--font-body": font.b, "--font-mono": font.m,
                 "--heading-weight": String(font.w), "--heading-tracking": font.t,
                 "--heading-transform": font.up ? "uppercase" : "none",
-                "--radius": shape.radius, "--radius-sm": shape.sm, "--radius-btn": shape.btn
+                "--radius": shape.radius, "--radius-sm": shape.sm, "--radius-btn": shape.btn,
+                "--tilt": DEPTHS[depth].tilt, "--lift": DEPTHS[depth].lift
             }
         };
         ["light", "dark"].forEach(function (mode) {
@@ -334,6 +395,10 @@
         st.shared = st.shared || {};
         if (!st.shared["--blur"]) st.shared["--blur"] = st.material === "glass" ? "28px" : st.material === "neon" ? "8px" : "0px";
         if (!st.shared["--border-w"]) st.shared["--border-w"] = "1px";
+        if (!st.depth) st.depth = "none";
+        if (!st.scene) st.scene = "none";
+        if (!st.shared["--tilt"]) st.shared["--tilt"] = DEPTHS[st.depth].tilt;
+        if (!st.shared["--lift"]) st.shared["--lift"] = DEPTHS[st.depth].lift;
         ["light", "dark"].forEach(function (m) {
             var t = st[m];
             if (!t["--bg-art"]) t["--bg-art"] = t["--bg"];
@@ -385,6 +450,8 @@
         Object.keys(st.shared).forEach(function (k) { el.style.setProperty(k, st.shared[k]); });
         Object.keys(t).forEach(function (k) { el.style.setProperty(k, t[k]); });
         el.style.colorScheme = mode;
+        // klasa włącza przechylanie (css) — style płaskie zostają bez transformacji
+        el.classList.toggle("is-3d", !!st.depth && st.depth !== "none");
     }
 
     function block(t, pad) {
@@ -408,7 +475,10 @@
         soft: "Neumorfizm: karty w kolorze tła, wytłoczone podwójnym cieniem (`--shadow-card`), pola wklęsłe (`--shadow-inset`). Bez widocznych ramek.",
         brutal: "Grube ramki w kolorze tekstu i twarde, przesunięte cienie bez rozmycia (`--shadow-card`, `--shadow-btn`). Zero gradientów.",
         paper: "Spokojne powierzchnie jak papier: cienka ramka, długi, bardzo miękki cień, dużo światła między blokami.",
-        neon: "Powierzchnie z poświatą w kolorze akcentu (`--shadow-card`), półprzezroczyste ramki akcentu, przyciski świecą (`--shadow-btn`)."
+        neon: "Powierzchnie z poświatą w kolorze akcentu (`--shadow-card`), półprzezroczyste ramki akcentu, przyciski świecą (`--shadow-btn`).",
+        clay: "Claymorphism: miękkie, napompowane bryły — duży rozmyty cień pod kartą i wewnętrzne odblaski (`--shadow-card`). Bez ramek.",
+        extrude: "Bryły wyciągnięte w głąb: warstwowy twardy cień tworzy boczną ściankę (`--shadow-card`), przyciski jak klawisze z dolną krawędzią (`--shadow-btn`).",
+        bevel: "Skeuomorfizm: fazowane krawędzie — jasna linia u góry (`--edge`), ciemna u dołu, cień rzucany na tło. Przyciski wypukłe, pola wklęsłe (`--shadow-inset`)."
     };
     function row(cells) { return "| " + cells.join(" | ") + " |"; }
     function toMarkdown(st) {
@@ -446,6 +516,8 @@
             "- **Materiał:** " + MATERIALS[st.material] + " — " + (MATERIAL_RULES[st.material] || ""),
             "- **Kształt:** " + SHAPES[st.shape].label + " — karty `" + sh["--radius"] + "`, pola `" + sh["--radius-sm"] + "`, przyciski `" + sh["--radius-btn"] + "`",
             "- **Tło dekoracyjne:** " + (ARTS[st.art] || "według stylu") + " (`--bg-art`)",
+            st.depth !== "none" ? "- **Głębia 3D:** " + DEPTHS[st.depth].label + " — przechylenie do `--tilt` (" + sh["--tilt"] + "), uniesienie `--lift` (" + sh["--lift"] + ")" : null,
+            st.scene !== "none" ? "- **Obiekt 3D:** " + SCENES[st.scene] + " (three.js) w banerze — kolory `--accent` i `--accent-2`; kod sceny w pliku `scena-3d.js`" : null,
             st.use ? "- **Kiedy używać:** " + st.use : null,
             "",
             "## Typografia",
@@ -485,6 +557,7 @@
             "- **Linki:** kolor `--link` (nie `--accent` — link ma zagwarantowany kontrast na tle).",
             "- **Statusy:** `--success`, `--warning`, `--danger` jako kolor tekstu lub ikony; tło komunikatu to ten sam kolor w 10–14% krycia.",
             "- **Tryb ciemny:** działa automatycznie (`prefers-color-scheme`) albo przez `data-theme=\"dark\"` na `<html>`; `data-theme=\"light\"` wymusza jasny.",
+            st.depth !== "none" ? "- **Głębia 3D:** karta w `perspective(900px)` obraca się za kursorem o maks. `--tilt` w osiach X i Y, a przy najechaniu unosi się o `--lift` (`translateZ`). Przy `prefers-reduced-motion: reduce` bez przechylania." : null,
             "- **Ruch:** animuj tylko `transform` i `opacity`; przy `prefers-reduced-motion: reduce` zastąp ruch krótkim przenikaniem.",
             "",
             "## Zmienne CSS",
@@ -526,7 +599,7 @@
     g.Tokens = {
         parse: parse, hex: hex, mix: mix, alpha: alpha, flat: flat, contrast: contrast, ensure: ensure,
         toHsl: toHsl, fromHsl: fromHsl, category: category,
-        CATEGORIES: CATEGORIES, MATERIALS: MATERIALS, SHAPES: SHAPES, ARTS: ARTS, KINDS: KINDS, FONTS: FONTS,
+        CATEGORIES: CATEGORIES, MATERIALS: MATERIALS, SHAPES: SHAPES, ARTS: ARTS, KINDS: KINDS, FONTS: FONTS, DEPTHS: DEPTHS, SCENES: SCENES,
         expand: expand, normalize: normalize, apply: apply, toCSS: toCSS, toMarkdown: toMarkdown, families: families, fontUrl: fontUrl,
         loadFonts: loadFonts, all: all, siteMode: siteMode, onSiteMode: onSiteMode
     };

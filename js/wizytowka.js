@@ -1,4 +1,4 @@
-// Wizytówka na pełnym ekranie: ?t=<szablon>&s=<styl> albo &g=<kod z generatora>, opcjonalnie &m=light|dark.
+// Wizytówka na pełnym ekranie: ?t=<szablon>&s=<styl> albo &g=<kod z generatora>, opcjonalnie &m=light|dark i &b=<tło 3D>.
 document.addEventListener("DOMContentLoaded", function () {
     var T = window.Tokens, W = window.Wizytowki;
     var params = new URLSearchParams(location.search);
@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         st = list[idx];
     }
     var mode = params.get("m") === "dark" || params.get("m") === "light" ? params.get("m") : T.siteMode();
+    var bg = window.Scena3D && Scena3D.validBg(params.get("b")) ? params.get("b") : "auto";
 
     var ICON = {
         light: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
@@ -36,11 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function query() {
-        return "?t=" + tpl + (code ? "&g=" + code : "&s=" + encodeURIComponent(st.id)) + "&m=" + mode;
+        return "?t=" + tpl + (code ? "&g=" + code : "&s=" + encodeURIComponent(st.id)) + "&m=" + mode + (bg !== "auto" ? "&b=" + bg : "");
     }
     function update() {
         T.apply(site, st, mode);
         T.loadFonts(st);
+        if (window.Scena3D) Scena3D.attachBg(site, st, mode, bg, null);
         document.documentElement.style.background = st[mode]["--bg"];
         document.documentElement.style.colorScheme = mode;
         sel.value = tpl;
@@ -48,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var m = document.getElementById("dMode");
         m.innerHTML = ICON[mode === "light" ? "dark" : "light"];
         document.getElementById("dBack").href = code ? "../style.html#generator?g=" + code
-            : "../style.html#wizytowki?t=" + tpl + "&s=" + encodeURIComponent(st.id) + "&m=" + mode;
+            : "../style.html#wizytowki?t=" + tpl + "&s=" + encodeURIComponent(st.id) + "&m=" + mode + "&b=" + bg;
         var t = W.byId(tpl);
         document.title = t.name + " · " + st.name + " · Wizytówka";
         try { history.replaceState(null, "", location.pathname + query()); } catch (e) {}

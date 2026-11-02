@@ -4,8 +4,10 @@
     var state, mode, current, probka;
     var DEFAULTS = {
         name: "Mój styl", accent: "#5B5BD6", harmony: "150", accent2: "#E8742A",
-        tone: "tinted", material: "glass", shape: "round", font: "jakarta", art: "auto", high: false
+        tone: "tinted", material: "glass", shape: "round", font: "jakarta", art: "auto", high: false,
+        depth: "none", scene: "none"
     };
+    var MATS_3D = ["clay", "extrude", "bevel", "glass", "neon"], ARTS_3D = ["orbs", "cubes", "orbs", "glow", "grid"];
     var ADJ = ["Quiet", "Bold", "Velvet", "Solar", "Arctic", "Smoky", "Lunar", "Copper", "Misty", "Electric", "Coral", "Silent", "Wild", "Golden", "Deep", "Paper", "Neon", "Soft"];
     var NOUN = ["Harbor", "Studio", "Orbit", "Grove", "Canvas", "Bloom", "Drift", "Forge", "Haven", "Pulse", "Prism", "Ridge", "Tide", "Field", "Garden", "Room"];
     var $ = function (id) { return document.getElementById(id); };
@@ -29,6 +31,7 @@
         return {
             id: "wlasny", name: s.name || "Mój styl", cat: T.category(a), collection: "Generator",
             material: s.material, shape: s.shape, font: s.font, art: s.art === "auto" ? null : s.art,
+            depth: s.depth, scene: s.scene,
             tagline: "Styl utworzony w generatorze.", use: "", highContrast: s.high,
             l: [tone[0], lt, a, a2],
             d: [tone[2], dt, T.ensure(a, tone[2], 4.5, "#FFFFFF"), T.ensure(a2, tone[2], 3.5, "#FFFFFF")]
@@ -48,6 +51,8 @@
             if (!T.MATERIALS[s.material]) s.material = DEFAULTS.material;
             if (!T.SHAPES[s.shape]) s.shape = DEFAULTS.shape;
             if (s.art !== "auto" && !T.ARTS[s.art]) s.art = "auto";
+            if (!T.DEPTHS[s.depth]) s.depth = DEFAULTS.depth;
+            if (!T.SCENES[s.scene]) s.scene = DEFAULTS.scene;
             s.name = String(s.name).slice(0, 32);
             return s;
         } catch (e) { return null; }
@@ -87,6 +92,13 @@
             b.dataset.v = k;
             $("gShape").appendChild(b);
         });
+        Object.keys(T.DEPTHS).forEach(function (k) {
+            var b = UI.el("button", "seg-btn", T.DEPTHS[k].label);
+            b.type = "button";
+            b.dataset.v = k;
+            $("gDepth").appendChild(b);
+        });
+        Object.keys(T.SCENES).forEach(function (k) { option($("gScene"), k, T.SCENES[k]); });
 
         probka = $("gProbka");
         widgets = loadWidgets();
@@ -116,7 +128,9 @@
         $("gFont").value = state.font;
         $("gArt").value = state.art;
         $("gHigh").checked = !!state.high;
+        $("gScene").value = state.scene;
         Array.prototype.forEach.call($("gShape").children, function (b) { b.setAttribute("aria-pressed", b.dataset.v === state.shape); });
+        Array.prototype.forEach.call($("gDepth").children, function (b) { b.setAttribute("aria-pressed", b.dataset.v === state.depth); });
         Array.prototype.forEach.call($("gMode").children, function (b) { b.setAttribute("aria-pressed", b.dataset.mode === mode); });
         update();
     }
@@ -134,8 +148,8 @@
             });
             $(p[0]).addEventListener("blur", function () { this.value = state[p[1]]; });
         });
-        ["gHarmony", "gTone", "gMaterial", "gFont", "gArt"].forEach(function (id) {
-            var key = { gHarmony: "harmony", gTone: "tone", gMaterial: "material", gFont: "font", gArt: "art" }[id];
+        ["gHarmony", "gTone", "gMaterial", "gFont", "gArt", "gScene"].forEach(function (id) {
+            var key = { gHarmony: "harmony", gTone: "tone", gMaterial: "material", gFont: "font", gArt: "art", gScene: "scene" }[id];
             $(id).addEventListener("change", function () { set(key, this.value); });
         });
         $("gHigh").addEventListener("change", function () { set("high", this.checked); });
@@ -143,19 +157,26 @@
             var b = e.target.closest("button");
             if (b) set("shape", b.dataset.v);
         });
+        $("gDepth").addEventListener("click", function (e) {
+            var b = e.target.closest("button");
+            if (b) set("depth", b.dataset.v);
+        });
         $("gMode").addEventListener("click", function (e) {
             var b = e.target.closest("button");
             if (b) { mode = b.dataset.mode; sync(); }
         });
-        $("gRandom").addEventListener("click", randomize);
+        $("gRandom").addEventListener("click", function () { randomize(false); });
+        $("gRandom3d").addEventListener("click", function () { randomize(true); });
         $("gCopy").addEventListener("click", function () { UI.copy(T.toCSS(current), "Skopiowano CSS"); });
         $("gLink").addEventListener("click", function () { UI.copy(location.href, "Skopiowano link do stylu"); });
         $("gDownload").addEventListener("click", function () { download("css"); });
         $("gDownloadMd").addEventListener("click", function () { download("md"); });
+        $("gDownloadJs").addEventListener("click", function () { download("js"); });
         $("gDownloadAll").addEventListener("click", function () {
             download("css");
             // druga paczka z opóźnieniem — część przeglądarek blokuje dwa pobrania naraz
             setTimeout(function () { download("md"); }, 400);
+            if (hasScene()) setTimeout(function () { download("js"); }, 800);
         });
         $("gDev").addEventListener("click", function () { setDev(this.getAttribute("aria-checked") !== "true"); });
         $("gDevDownloads").addEventListener("click", function (e) {
@@ -172,14 +193,16 @@
         });
     }
 
+    function hasScene() { return current && current.scene !== "none" && window.Scena3D; }
     function file(kind) {
+        if (kind === "js") return window.Scena3D.code(current);
         return kind === "md" ? T.toMarkdown(current) : T.toCSS(current);
     }
     function download(kind) {
-        var blob = new Blob([file(kind)], { type: kind === "md" ? "text/markdown" : "text/css" });
+        var blob = new Blob([file(kind)], { type: { md: "text/markdown", js: "text/javascript" }[kind] || "text/css" });
         var a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
-        a.download = slug(state.name) + "." + kind;
+        a.download = kind === "js" ? "scena-3d.js" : slug(state.name) + "." + kind;
         document.body.appendChild(a);
         a.click();
         setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 0);
@@ -263,15 +286,19 @@
             .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")) || "styl";
     }
 
-    function randomize() {
-        var mats = Object.keys(T.MATERIALS), shapes = Object.keys(T.SHAPES), fonts = Object.keys(T.FONTS), arts = Object.keys(T.ARTS);
+    // tryb 3D losuje tylko materiały z głębią, tła 3D i zawsze dodaje obiekt three.js
+    function randomize(is3d) {
+        var mats = is3d ? MATS_3D : Object.keys(T.MATERIALS), shapes = Object.keys(T.SHAPES), fonts = Object.keys(T.FONTS), arts = Object.keys(T.ARTS);
+        var scenes = Object.keys(T.SCENES).filter(function (k) { return k !== "none"; });
         state = {
             name: pick(ADJ) + " " + pick(NOUN),
             accent: T.fromHsl(Math.random() * 360, 0.55 + Math.random() * 0.35, 0.38 + Math.random() * 0.17),
             harmony: pick(["40", "180", "150", "120"]), accent2: state.accent2,
             tone: pick(["neutral", "tinted", "tinted", "warm", "cool"]),
             material: pick(mats), shape: pick(shapes), font: pick(fonts),
-            art: Math.random() < 0.5 ? "auto" : pick(arts), high: false
+            art: is3d ? pick(ARTS_3D) : Math.random() < 0.5 ? "auto" : pick(arts), high: false,
+            depth: is3d ? pick(["soft", "strong", "strong"]) : "none",
+            scene: is3d ? pick(scenes) : "none"
         };
         sync();
     }
@@ -280,8 +307,14 @@
         current = T.expand(seedFrom(state));
         T.loadFonts(current);
         T.apply(probka, current, mode);
+        if (window.Scena3D) Scena3D.attach(probka, current, mode);
         Probka.setName(probka, current.name);
         $("gTitle").textContent = current.name || "Podgląd";
+        var js = !!hasScene();
+        if (!js && tab === "js") tab = "css";
+        $("gJsTab").hidden = !js;
+        $("gJsItem").hidden = !js;
+        $("gDevJs").hidden = !js;
         $("gCss").textContent = file(tab);
         $("gCssName").textContent = slug(state.name) + ".css";
         $("gMdName").textContent = slug(state.name) + ".md";
