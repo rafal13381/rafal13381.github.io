@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Style · rafal13381</title>
     <meta name="description" content="Katalog 130 stylów interfejsu (w tym 10 stylów 3D) z filtrami, generator własnych stylów 2D i 3D z kontrolą kontrastu WCAG i przykładowe strony-wizytówki w każdym stylu.">
-    <link rel="stylesheet" data-consent="fonts" data-href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <script src="js/consent.js?v=20261011f"></script>
-    <link rel="stylesheet" href="css/style.css?v=20261029a">
+    <link rel="stylesheet" href="css/style.css?v=20261103b">
     <link rel="stylesheet" href="css/probka.css?v=20261029a">
     <link rel="stylesheet" href="css/wizytowki.css?v=20261029e">
-    <link rel="stylesheet" href="css/wizytowki-ramka.css?v=20261012e">
-    <script src="js/theme.js?v=20261011f"></script>
+    <link rel="stylesheet" href="css/wizytowki-ramka.css?v=20261103a">
+    <script src="js/theme.js?v=20261103a"></script>
     <script src="js/styles.js?v=20261011f" defer></script>
     <script src="js/kolekcja.js?v=20261029a" defer></script>
     <script src="js/tokens.js?v=20261029a" defer></script>
@@ -24,31 +23,29 @@
     <script src="js/generator.js?v=20261029a" defer></script>
 </head>
 <body>
-    <header class="nav wrap">
-        <nav class="panel" aria-label="Główna">
-            <a class="brand" href="index.html">
-                <span class="brand-mark" aria-hidden="true">r</span>
-                <span>rafal13381</span>
-            </a>
-            <div class="tabs">
+    <header class="site-nav">
+        <div class="wrap site-nav-inner">
+            <a class="brand" href="index.html">rafal13381</a>
+            <nav class="tabs" aria-label="Główna">
                 <a class="tab" href="index.html">Start</a>
                 <a class="tab" href="kliker.html">Kliker</a>
                 <a class="tab" href="autostrada.html">Autostrada</a>
                 <a class="tab" href="style.html" aria-current="page">Style</a>
-            </div>
+            </nav>
+            <a class="btn btn-sm nav-contact" href="https://github.com/rafal13381">GitHub</a>
             <button class="icon-btn" id="themeToggle" type="button" aria-label="Motyw"></button>
-        </nav>
+        </div>
     </header>
 
     <main class="wrap wrap-wide">
         <section class="hero hero-sm">
-            <!-- <span class="eyebrow materialize"><span class="dot"></span>Katalog stylów</span> -->
-            <h1 class="materialize" style="--i:1">Style</h1>
-            <p class="lead materialize" style="--i:2">
+            <!-- <span class="eyebrow"><span class="dot"></span>Katalog stylów</span> -->
+            <h1>Style</h1>
+            <p class="lead">
                 Gotowe systemy wizualne z paletą dla trybu jasnego i ciemnego, typografią i kształtami.
                 Każdy styl spełnia wymagania kontrastu WCAG i można go skopiować jako zmienne CSS.
             </p>
-            <div class="view-tabs seg materialize" style="--i:3" role="tablist" aria-label="Widok">
+            <div class="view-tabs seg" role="tablist" aria-label="Widok">
                 <a class="seg-btn" href="#katalog" role="tab" id="tabKatalog">Katalog <span class="seg-count" id="totalCount"></span></a>
                 <a class="seg-btn" href="#generator" role="tab" id="tabGenerator">Generator stylów</a>
                 <a class="seg-btn" href="#wizytowki" role="tab" id="tabWizytowki">Wizytówki</a>
@@ -57,7 +54,7 @@
 
         <!-- ---------- katalog ---------- -->
         <section class="catalog" id="viewKatalog" aria-labelledby="tabKatalog">
-            <aside class="panel filters materialize" style="--i:4" aria-label="Filtry">
+            <aside class="panel filters" aria-label="Filtry">
                 <details id="filtersBox" open>
                     <summary>
                         <span>Filtry</span>
@@ -70,7 +67,7 @@
             </aside>
 
             <div class="catalog-main">
-                <div class="panel toolbar materialize" style="--i:5">
+                <div class="panel toolbar">
                     <label class="search">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
                         <input id="q" type="search" placeholder="Szukaj: nazwa, nastrój, zastosowanie…" autocomplete="off" aria-label="Szukaj stylu">
@@ -189,10 +186,10 @@
                 <div class="panel dev-files" id="gDevPanel" hidden>
                     <div class="card-head">
                         <h2>Pliki dla programisty</h2>
-                        <span class="label">.css · .md</span>
+                        <span class="label">.css i .md</span>
                     </div>
                     <p class="dev-note">
-                        Generator nie zapisuje projektu. <b>Żeby zachować styl, pobierz pliki</b> — arkusz CSS
+                        Generator nie zapisuje projektu. <b>Żeby zachować styl, pobierz pliki</b>: arkusz CSS
                         wklejasz do projektu, a plik .md przekazujesz asystentowi AI jako opis stylu.
                     </p>
                     <ul class="files">
@@ -208,7 +205,7 @@
                         </li>
                         <li class="file" id="gJsItem" hidden>
                             <span class="file-ico" aria-hidden="true">JS</span>
-                            <span class="file-text"><b>scena-3d.js</b><small>Obiekt 3D (three.js) w kolorach stylu — moduł do wklejenia</small></span>
+                            <span class="file-text"><b>scena-3d.js</b><small>Obiekt 3D (three.js) w kolorach stylu, moduł do wklejenia</small></span>
                             <button class="btn btn-secondary btn-sm" id="gDownloadJs" type="button">Pobierz</button>
                         </li>
                     </ul>
@@ -319,10 +316,10 @@
                 <div class="panel dev-files" id="wDevPanel" hidden>
                     <div class="card-head">
                         <h2>Pliki dla programisty</h2>
-                        <span class="label">.html · .css · .md</span>
+                        <span class="label">.html, .css i .md</span>
                     </div>
                     <p class="dev-note">
-                        Podgląd nie zapisuje projektu. <b>Żeby zachować wizytówkę, pobierz pliki</b> — strona .html działa od razu
+                        Podgląd nie zapisuje projektu. <b>Żeby zachować wizytówkę, pobierz pliki</b>: strona .html działa od razu
                         po otwarciu w przeglądarce, arkusz .css wklejasz do własnego projektu, a plik .md przekazujesz asystentowi AI
                         jako opis treści, struktury i stylu.
                     </p>
@@ -361,22 +358,38 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <footer class="site-footer wrap wrap-wide">
-        <div class="footer-inner">
-            <a class="brand" href="index.html">
-                <span class="brand-mark" aria-hidden="true">r</span>
-                <span>rafal13381</span>
-            </a>
-            <nav class="footer-links" aria-label="Stopka">
-                <a href="index.html">Start</a>
-                <a href="kliker.html">Kliker</a>
-                <a href="autostrada.html">Autostrada</a>
-                <a href="style.html">Style</a>
-                <a href="https://github.com/rafal13381">GitHub</a>
-                <a href="prywatnosc.html">Prywatność i cookies</a>
-                <button class="footer-btn" type="button" data-consent-open>Ustawienia prywatności</button>
-            </nav>
-            <p class="footer-copy">© 2026 rafal13381 · Programista Full Stack</p>
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-grid">
+                <div class="footer-mast">
+                    <a class="brand" href="index.html">rafal13381</a>
+                    <p>Programista full stack, Białystok.</p>
+                </div>
+                <nav aria-label="Strony">
+                    <h2>Strony</h2>
+                    <ul>
+                        <li><a href="index.html">Start</a></li>
+                        <li><a href="kliker.html">Kliker</a></li>
+                        <li><a href="autostrada.html">Autostrada</a></li>
+                        <li><a href="style.html">Style</a></li>
+                    </ul>
+                </nav>
+                <div>
+                    <h2>Profile</h2>
+                    <ul>
+                        <li><a href="https://github.com/rafal13381">GitHub</a></li>
+                        <li><a href="https://github.com/rafal13381/rafal13381.github.io">Kod tej strony</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>Prywatność</h2>
+                    <ul>
+                        <li><a href="prywatnosc.html">Prywatność i cookies</a></li>
+                        <li><button class="footer-btn" type="button" data-consent-open>Ustawienia prywatności</button></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="footer-copy">© 2026 rafal13381. Programista full stack.</p>
         </div>
     </footer>
 </body>

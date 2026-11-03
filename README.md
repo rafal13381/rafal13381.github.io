@@ -24,10 +24,15 @@ Czysty HTML, CSS i JavaScript — bez frameworków, bundlera i kroku budowania. 
 ```
 ├── index.html, kliker.html, autostrada.html, style.html, prywatnosc.html
 ├── css/
-│   ├── style.css              # wygląd całej strony (tokeny, panele, nawigacja, stopka)
+│   ├── tokens.css             # tokeny systemu Almanac: kolory (jasny i ciemny), kroje, skala odstępów
+│   ├── base.css               # reguły bazowe (focus, overflow, ograniczony ruch); omijają podglądy .pk i .wz
+│   ├── fonts.css              # @font-face krojów z fonts/
+│   ├── style.css              # komponenty strony: nawigacja, stopka, CV, katalog, gry
 │   ├── probka.css             # przykładowy interfejs z 21 widżetami (.pk)
 │   ├── wizytowki.css          # komponenty stron-wizytówek (.wz) — trafiają też do eksportu
 │   └── wizytowki-ramka.css    # ramka podglądu i pasek sterowania wizytówki
+├── fonts/                     # Hanken Grotesk, Newsreader, IBM Plex Mono (woff2, licencje OFL)
+├── img/prace/                 # zrzuty prac na stronie CV (odświeżyć po zmianach w grach lub katalogu)
 ├── js/
 │   ├── consent.js             # baner prywatności, zgoda na Google Fonts
 │   ├── theme.js               # przełącznik motywu: system / jasny / ciemny
@@ -82,4 +87,4 @@ Po zmianie pliku `.css` lub `.js` podbij parametr wersji w odwołaniu (`?v=…`)
 
 ## Prywatność
 
-Strona nie używa ciasteczek, analityki ani reklam. W `localStorage` zapisuje tylko ustawienia (motyw, zgodę, wybór w generatorze) i postęp w grze Autostrada. Czcionki Google Fonts wczytują się dopiero po zgodzie w banerze — szczegóły w [`prywatnosc.html`](https://rafal13381.github.io/prywatnosc.html).
+Strona nie używa ciasteczek, analityki ani reklam. W `localStorage` zapisuje tylko ustawienia (motyw, zgodę, wybór w generatorze) i postęp w grze Autostrada. Kroje pisma są hostowane razem ze stroną (`fonts/`), więc strona nie łączy się z Google Fonts. Szczegóły w [`prywatnosc.html`](https://rafal13381.github.io/prywatnosc.html).

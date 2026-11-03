@@ -2,6 +2,7 @@
 (function () {
     var KEY = "theme";
     var root = document.documentElement;
+    root.classList.add("js"); // stany ukryte do czasu uruchomienia skryptów (np. toast, komunikat HUD)
     var order = ["system", "light", "dark"];
     var labels = { system: "Theme: system", light: "Theme: light", dark: "Theme: dark" };
     var icons = {
