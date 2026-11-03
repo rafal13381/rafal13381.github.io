@@ -6,9 +6,10 @@
     <title>rafal13381, programista full stack</title>
     <meta name="description" content="Programista Full Stack — aplikacje webowe (Angular, .NET) i mobilne (React Native, Swift). Staż w Urzędzie Komisji Nadzoru Finansowego.">
     <script src="js/consent.js?v=20261011f"></script>
-    <link rel="stylesheet" href="css/style.css?v=20261103b">
-    <script src="js/theme.js?v=20261103a"></script>
+    <link rel="stylesheet" href="css/style.css?v=20261103e">
+    <script src="js/theme.js?v=20261103c"></script>
     <script src="js/script.js?v=20261011f" defer></script>
+    <script src="js/galeria.js?v=20261103a" defer></script>
 </head>
 <body>
     <header class="site-nav">
@@ -26,80 +27,103 @@
     </header>
 
     <main>
-        <section class="cv-hero" aria-labelledby="cv-title">
+        <section class="band premiere" aria-labelledby="cv-title">
             <div class="wrap">
-                <h1 id="cv-title">Programista full stack</h1>
-                <div class="cv-hero-foot">
-                    <p class="lead">Aplikacje webowe w Angularze i .NET, mobilne w React Native i Swift.</p>
-                    <div class="hero-actions">
-                        <a class="btn btn-primary btn-lg" href="https://github.com/rafal13381">GitHub</a>
-                        <a class="text-link" href="#projekty">Prace</a>
+                <h1 id="cv-title">Programista full stack.</h1>
+                <p class="premiere-lead">Aplikacje webowe w Angularze i .NET, mobilne w React Native i Swift.</p>
+                <div class="premiere-actions">
+                    <a class="btn btn-primary btn-lg" href="https://github.com/rafal13381">GitHub</a>
+                    <a class="text-link" href="#projekty">Zobacz prace</a>
+                </div>
+                <figure class="premiere-shot">
+                    <img src="img/prace/style-katalog.webp" srcset="img/prace/style-katalog.webp 1160w, img/prace/style-katalog@2x.webp 2320w" sizes="(max-width: 1128px) calc(100vw - 48px), 1080px" width="1160" height="725" decoding="async" alt="Katalog stylów: filtry po lewej i siatka miniatur stylów z nazwami i opisami" fetchpriority="high">
+                </figure>
+            </div>
+        </section>
+
+        <section class="band band-light highlights" aria-label="Najważniejsze fakty">
+            <dl class="wrap highlights-grid">
+                <div><dt>Staż</dt><dd>Urząd Komisji Nadzoru Finansowego</dd></div>
+                <div><dt>Szkoła, od 2022 do 2027</dt><dd>Technikum Programistyczne Infotech w Białymstoku</dd></div>
+                <div><dt>Osiągnięcie</dt><dd>Finalista Ogólnopolskiej Olimpiady Innowacji Technicznych</dd></div>
+            </dl>
+        </section>
+
+        <section class="band band-night launch" id="projekty" aria-labelledby="style-title">
+            <div class="wrap" id="aktualny-projekt">
+                <header class="launch-head">
+                    <h2 id="style-title">Style.</h2>
+                    <p class="launch-lead">Katalog i generator stylów interfejsu. Aktualny projekt, w trakcie rozwoju, część tej strony.</p>
+                </header>
+                <div class="gallery" data-gallery>
+                    <div class="gallery-track" tabindex="0" role="region" aria-roledescription="galeria" aria-label="Zrzuty projektu Style, przewijane strzałkami">
+                        <div class="gallery-rail">
+                            <figure class="gallery-item"><img src="img/prace/style-generator.webp" srcset="img/prace/style-generator.webp 1440w, img/prace/style-generator@2x.webp 2880w" sizes="(max-width: 1128px) 84vw, 908px" width="1440" height="900" decoding="async" alt="Generator: panel ustawień koloru i kształtu obok podglądu stylu na widżetach" loading="lazy" draggable="false"><figcaption>Generator</figcaption></figure>
+                            <figure class="gallery-item"><img src="img/prace/style-wizytowki.webp" srcset="img/prace/style-wizytowki.webp 1440w, img/prace/style-wizytowki@2x.webp 2880w" sizes="(max-width: 1128px) 84vw, 908px" width="1440" height="900" decoding="async" alt="Wizytówki: wybór branży po lewej i strona-wizytówka w ramce podglądu" loading="lazy" draggable="false"><figcaption>Wizytówki</figcaption></figure>
+                            <figure class="gallery-item"><img src="img/prace/style-podglad.webp" srcset="img/prace/style-podglad.webp 1440w, img/prace/style-podglad@2x.webp 2880w" sizes="(max-width: 1128px) 84vw, 908px" width="1440" height="900" decoding="async" alt="Podgląd jednego stylu: przykładowy interfejs z widżetami w barwach stylu" loading="lazy" draggable="false"><figcaption>Podgląd stylu</figcaption></figure>
+                            <figure class="gallery-item"><img src="img/prace/style-katalog.webp" srcset="img/prace/style-katalog.webp 1160w, img/prace/style-katalog@2x.webp 2320w" sizes="(max-width: 1128px) 84vw, 908px" width="1160" height="725" decoding="async" alt="Katalog: filtry po kolorystyce i materiale, wyszukiwarka i siatka miniatur stylów" loading="lazy" draggable="false"><figcaption>Katalog</figcaption></figure>
+                        </div>
+                    </div>
+                    <div class="gallery-controls">
+                        <button class="icon-btn" type="button" data-gallery-prev aria-label="Poprzedni kadr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+                        <button class="icon-btn" type="button" data-gallery-next aria-label="Następny kadr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
                     </div>
                 </div>
-                <dl class="cv-facts">
-                    <div><dt>Staż</dt><dd>Urząd Komisji Nadzoru Finansowego</dd></div>
-                    <div><dt>Szkoła</dt><dd>Technikum Programistyczne Infotech w Białymstoku</dd></div>
-                    <div><dt>Lata nauki</dt><dd class="num">od 2022 do 2027</dd></div>
+                <dl class="launch-figures">
+                    <div><dt class="num">120</dt><dd>systemów wizualnych z paletą dla trybu jasnego i ciemnego, filtrowanych po kolorystyce, materiale, kształcie i typografii</dd></div>
+                    <div><dt>WCAG 2.2</dt><dd>automatyczna korekta kontrastu w generatorze własnych stylów</dd></div>
+                    <div><dt class="num">21</dt><dd>interaktywnych widżetów w podglądzie, eksport stylu do .css i opisu .md dla asystentów AI</dd></div>
+                    <div><dt class="num">16</dt><dd>branż z przykładowymi stronami-wizytówkami w każdym stylu</dd></div>
                 </dl>
-            </div>
-        </section>
-
-        <section class="cv-section" aria-labelledby="kompetencje">
-            <div class="wrap">
-                <header class="cv-head">
-                    <h2 id="kompetencje">Technologie i miejsca ich użycia</h2>
-                    <p>Każde zaznaczenie odpowiada pozycji z doświadczenia lub projektów opisanych niżej.</p>
-                </header>
-                <div class="sheet sheet-scroll" tabindex="0" role="region" aria-labelledby="kompetencje">
-                    <table class="matrix">
-                        <thead>
-                            <tr><th scope="col">Technologia</th><th scope="col">Staż w UKNF</th><th scope="col">Aplikacje mobilne</th><th scope="col">Ta strona</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><th scope="row">Angular</th><td class="on"><span class="visually-hidden">tak</span></td><td></td><td></td></tr>
-                            <tr><th scope="row">C# (.NET)</th><td class="on"><span class="visually-hidden">tak</span></td><td></td><td></td></tr>
-                            <tr><th scope="row">Python</th><td class="on"><span class="visually-hidden">tak</span></td><td></td><td class="on"><span class="visually-hidden">tak</span></td></tr>
-                            <tr><th scope="row">TypeScript</th><td class="on"><span class="visually-hidden">tak</span></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
-                            <tr><th scope="row">JavaScript</th><td class="on"><span class="visually-hidden">tak</span></td><td class="on"><span class="visually-hidden">tak</span></td><td class="on"><span class="visually-hidden">tak</span></td></tr>
-                            <tr><th scope="row">React Native</th><td></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
-                            <tr><th scope="row">Swift</th><td></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
-                            <tr><th scope="row">HTML i CSS</th><td></td><td></td><td class="on"><span class="visually-hidden">tak</span></td></tr>
-                            <tr><th scope="row">GitHub Copilot</th><td class="on"><span class="visually-hidden">tak</span></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
-                            <tr><th scope="row">Claude Code, OpenCode, Antigravity, OpenSpec</th><td></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
-                        </tbody>
-                    </table>
-                    <p class="sheet-note">Poza tabelą: C++ i SwiftUI.</p>
+                <p class="launch-stack">HTML, CSS i JavaScript bez frameworków. JavaScript, CSS Container Queries, Design tokens, WCAG 2.2, Python.</p>
+                <div class="launch-actions">
+                    <a class="btn btn-primary btn-lg" href="style.html#katalog">Katalog stylów</a>
+                    <a class="text-link" href="style.html#generator">Generator</a>
+                    <a class="text-link" href="style.html#wizytowki">Wizytówki</a>
+                    <a class="text-link" href="https://github.com/rafal13381/rafal13381.github.io">Kod na GitHubie</a>
                 </div>
             </div>
         </section>
 
-        <section class="cv-section" aria-labelledby="doswiadczenie">
+        <section class="band band-light" aria-label="Gry">
+            <div class="wrap tiles">
+                <article class="tile">
+                    <h2><a href="autostrada.html">Autostrada.</a></h2>
+                    <p>Otwarty świat 3D (three.js): pięć map, paliwo i stacje, monety, zlecenia kurierskie, garaż z autami i zapis postępu.</p>
+                    <a class="tile-shot" href="autostrada.html" tabindex="-1" aria-hidden="true"><img src="img/prace/autostrada.webp" srcset="img/prace/autostrada.webp 1440w, img/prace/autostrada@2x.webp 2880w" sizes="(max-width: 860px) calc(100vw - 128px), 460px" width="1440" height="900" decoding="async" alt="" loading="lazy"></a>
+                </article>
+                <article class="tile">
+                    <h2><a href="kliker.html">Kliker.</a></h2>
+                    <p>Gra przeglądarkowa w JavaScript: kliknięcia, ulepszenia i podatek.</p>
+                    <a class="tile-shot" href="kliker.html" tabindex="-1" aria-hidden="true"><img src="img/prace/kliker.webp" srcset="img/prace/kliker.webp 1440w, img/prace/kliker@2x.webp 2880w" sizes="(max-width: 860px) calc(100vw - 128px), 460px" width="1440" height="900" decoding="async" alt="" loading="lazy"></a>
+                </article>
+            </div>
+        </section>
+
+        <section class="band specs" aria-labelledby="dane">
             <div class="wrap">
-                <header class="cv-head">
-                    <h2 id="doswiadczenie">Doświadczenie</h2>
-                    <p>Tworzę aplikacje webowe i mobilne. Doświadczenie zawodowe zdobywam na stażu
-                    w Urzędzie Komisji Nadzoru Finansowego, gdzie rozwijam aplikacje w Angularze i .NET.
-                    Równolegle buduję aplikacje mobilne w React Native i Swift, wykorzystując narzędzia
-                    AI-native w całym cyklu wytwarzania oprogramowania.</p>
-                </header>
-                <ol class="register">
-                    <li class="entry">
-                        <p class="entry-key">Staż</p>
-                        <div>
-                            <h3>Programista</h3>
-                            <p class="entry-org">Urząd Komisji Nadzoru Finansowego</p>
+                <h2 id="dane">Dane techniczne.</h2>
+                <dl class="spec-list">
+                    <div class="spec">
+                        <dt>Doświadczenie</dt>
+                        <dd>
+                            <h3>Programista, staż</h3>
+                            <p class="spec-org">Urząd Komisji Nadzoru Finansowego</p>
+                            <p>Tworzę aplikacje webowe i mobilne. Doświadczenie zawodowe zdobywam na stażu
+                            w Urzędzie Komisji Nadzoru Finansowego, gdzie rozwijam aplikacje w Angularze i .NET.
+                            Równolegle buduję aplikacje mobilne w React Native i Swift, wykorzystując narzędzia
+                            AI-native w całym cyklu wytwarzania oprogramowania.</p>
                             <ul class="bullets">
                                 <li>Tworzenie aplikacji webowych w frameworku Angular w ramach zespołu projektowego.</li>
                                 <li>Programowanie w C# (.NET), Python, TypeScript i JavaScript.</li>
                                 <li>Wykorzystanie narzędzi AI-native (GitHub Copilot) na każdym etapie wytwarzania oprogramowania.</li>
                                 <li>Szkolenie „Bezpieczeństwo na rynku finansowym z perspektywy CSIRT KNF”.</li>
                             </ul>
-                            <p class="entry-tags">Angular, .NET, C#, TypeScript, Python</p>
-                        </div>
-                    </li>
-                    <li class="entry">
-                        <p class="entry-key">Dodatkowe doświadczenie</p>
-                        <div>
+                        </dd>
+                    </div>
+                    <div class="spec">
+                        <dt>Dodatkowe doświadczenie</dt>
+                        <dd>
                             <h3>Aplikacje mobilne</h3>
                             <ul class="bullets">
                                 <li>Projektowanie i rozwój aplikacji mobilnych w React Native oraz natywnie w Swift.</li>
@@ -107,103 +131,87 @@
                                 <li>Praca zespołowa przy rozwoju produktu.</li>
                                 <li>Praca z narzędziami AI-native (GitHub Copilot, OpenCode, Antigravity, Claude Code, OpenSpec) w cyklu tworzenia oprogramowania.</li>
                             </ul>
-                            <p class="entry-tags">React Native, Swift, TypeScript, JavaScript</p>
-                        </div>
-                    </li>
-                </ol>
-            </div>
-        </section>
-
-        <section class="cv-section" id="projekty" aria-labelledby="prace">
-            <div class="wrap">
-                <header class="cv-head">
-                    <h2 id="prace">Prace</h2>
-                    <p>Wszystkie trzy działają na tej stronie. Kod jest na GitHubie.</p>
-                </header>
-                <article class="case" id="aktualny-projekt">
-                    <figure class="shot shot-lead">
-                        <img src="img/prace/style.jpg" width="1280" height="800" alt="Katalog stylów: filtry po lewej i siatka miniatur stylów z nazwami i opisami" loading="lazy">
-                    </figure>
-                    <div class="case-text">
-                        <h3>Style: katalog i generator stylów interfejsu</h3>
-                        <p class="entry-org">Aktualny projekt, w trakcie rozwoju. Część tej strony: HTML, CSS i JavaScript bez frameworków.</p>
-                        <ul class="bullets">
-                            <li>Katalog 120 systemów wizualnych z paletą dla trybu jasnego i ciemnego, filtrowaniem po kolorystyce, materiale, kształcie i typografii.</li>
-                            <li>Generator własnych stylów z automatyczną korektą kontrastu WCAG 2.2 i podglądem na 21 interaktywnych widżetach.</li>
-                            <li>Eksport stylu do pliku .css oraz opisu .md dla asystentów AI.</li>
-                            <li>Przykładowe strony-wizytówki dla 16 branż, które można obejrzeć w każdym stylu.</li>
-                        </ul>
-                        <p class="entry-tags">JavaScript, CSS Container Queries, Design tokens, WCAG 2.2, Python</p>
-                        <ul class="link-list">
-                            <li><a href="style.html#katalog">Katalog stylów</a></li>
-                            <li><a href="style.html#generator">Generator</a></li>
-                            <li><a href="style.html#wizytowki">Wizytówki</a></li>
-                            <li><a href="https://github.com/rafal13381/rafal13381.github.io">Kod na GitHubie</a></li>
-                        </ul>
+                        </dd>
                     </div>
-                </article>
-                <div class="works">
-                    <article class="work">
-                        <a class="shot" href="autostrada.html"><img src="img/prace/autostrada.jpg" width="1280" height="800" alt="Autostrada: plansza gry 3D z ekranem startowym i panelami portfela, zlecenia i garażu" loading="lazy"></a>
-                        <h3><a href="autostrada.html">Autostrada</a></h3>
-                        <p>Otwarty świat 3D (three.js): pięć map, paliwo i stacje, monety, zlecenia kurierskie, garaż z autami i zapis postępu.</p>
-                    </article>
-                    <article class="work">
-                        <a class="shot" href="kliker.html"><img src="img/prace/kliker.jpg" width="1280" height="800" alt="Kliker: licznik punktów, przycisk kliknięcia i panel ulepszeń" loading="lazy"></a>
-                        <h3><a href="kliker.html">Kliker</a></h3>
-                        <p>Gra przeglądarkowa w JavaScript: kliknięcia, ulepszenia i podatek.</p>
-                    </article>
-                </div>
+                    <div class="spec">
+                        <dt id="kompetencje">Technologie</dt>
+                        <dd>
+                            <div class="matrix-wrap" tabindex="0" role="region" aria-labelledby="kompetencje">
+                                <table class="matrix">
+                                    <thead>
+                                        <tr><th scope="col">Technologia</th><th scope="col">Staż w UKNF</th><th scope="col">Aplikacje mobilne</th><th scope="col">Ta strona</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><th scope="row">Angular</th><td class="on"><span class="visually-hidden">tak</span></td><td></td><td></td></tr>
+                                        <tr><th scope="row">C# (.NET)</th><td class="on"><span class="visually-hidden">tak</span></td><td></td><td></td></tr>
+                                        <tr><th scope="row">Python</th><td class="on"><span class="visually-hidden">tak</span></td><td></td><td class="on"><span class="visually-hidden">tak</span></td></tr>
+                                        <tr><th scope="row">TypeScript</th><td class="on"><span class="visually-hidden">tak</span></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
+                                        <tr><th scope="row">JavaScript</th><td class="on"><span class="visually-hidden">tak</span></td><td class="on"><span class="visually-hidden">tak</span></td><td class="on"><span class="visually-hidden">tak</span></td></tr>
+                                        <tr><th scope="row">React Native</th><td></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
+                                        <tr><th scope="row">Swift</th><td></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
+                                        <tr><th scope="row">HTML i CSS</th><td></td><td></td><td class="on"><span class="visually-hidden">tak</span></td></tr>
+                                        <tr><th scope="row">GitHub Copilot</th><td class="on"><span class="visually-hidden">tak</span></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
+                                        <tr><th scope="row">Claude Code, OpenCode, Antigravity, OpenSpec</th><td></td><td class="on"><span class="visually-hidden">tak</span></td><td></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="spec-note">Poza tabelą: C++ i SwiftUI.</p>
+                        </dd>
+                    </div>
+                    <div class="spec">
+                        <dt>Edukacja</dt>
+                        <dd>
+                            <h3>Technikum Programistyczne Infotech w Białymstoku</h3>
+                            <p class="spec-org">Profil: programista full stack, <span class="num">od 2022 do 2027</span></p>
+                        </dd>
+                    </div>
+                    <div class="spec">
+                        <dt>Osiągnięcia</dt>
+                        <dd>
+                            <h3>Finalista Ogólnopolskiej Olimpiady Innowacji Technicznych</h3>
+                            <p class="spec-org">Elektronika i mechatronika</p>
+                        </dd>
+                    </div>
+                    <div class="spec">
+                        <dt>Certyfikaty i szkolenia</dt>
+                        <dd>
+                            <ul class="spec-items">
+                                <li><b>INF.03</b> Kwalifikacja zawodowa: tworzenie i administrowanie stronami i aplikacjami internetowymi oraz bazami danych</li>
+                                <li><b>PECP</b></li>
+                                <li><b><abbr>SOFTECH</abbr></b></li>
+                                <li><b>Bezpieczeństwo na rynku finansowym</b> Szkolenie z perspektywy CSIRT KNF</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div class="spec">
+                        <dt>Kompetencje</dt>
+                        <dd>
+                            <ul class="spec-items">
+                                <li><b>Praca zespołowa</b> Doświadczenie w zespołach projektowych</li>
+                                <li><b>Pierwsza pomoc</b> Znajomość zasad udzielania pierwszej pomocy</li>
+                                <li><b>Prawo jazdy</b> Kategoria B</li>
+                            </ul>
+                        </dd>
+                    </div>
+                    <div class="spec">
+                        <dt>O mnie</dt>
+                        <dd>
+                            <ul class="spec-items">
+                                <li><b>Obecnie</b> Rozwój w programowaniu full stack</li>
+                                <li><b>Zainteresowania</b> Finanse</li>
+                                <li><b>Języki</b> Polski, angielski, hiszpański (podstawowy)</li>
+                                <li><b>Strona</b> <a href="https://rafal13381.github.io">rafal13381.github.io</a></li>
+                            </ul>
+                        </dd>
+                    </div>
+                </dl>
             </div>
         </section>
 
-        <section class="cv-section" aria-labelledby="edukacja">
-            <div class="wrap">
-                <header class="cv-head">
-                    <h2 id="edukacja">Edukacja, osiągnięcia i certyfikaty</h2>
-                </header>
-                <div class="sheet">
-                    <table class="ledger">
-                        <thead><tr><th scope="col">Pozycja</th><th scope="col">Szczegóły</th><th scope="col" class="num">Okres</th></tr></thead>
-                        <tbody>
-                            <tr><th scope="row">Technikum Programistyczne Infotech w Białymstoku</th><td>Profil: programista full stack</td><td class="num">2022 do 2027</td></tr>
-                            <tr><th scope="row">Finalista Ogólnopolskiej Olimpiady Innowacji Technicznych</th><td>Elektronika i mechatronika</td><td></td></tr>
-                            <tr><th scope="row">INF.03</th><td>Kwalifikacja zawodowa: tworzenie i administrowanie stronami i aplikacjami internetowymi oraz bazami danych</td><td></td></tr>
-                            <tr><th scope="row">PECP</th><td></td><td></td></tr>
-                            <tr><th scope="row"><abbr>SOFTECH</abbr></th><td></td><td></td></tr>
-                            <tr><th scope="row">Bezpieczeństwo na rynku finansowym</th><td>Szkolenie z perspektywy CSIRT KNF</td><td></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section class="cv-section" aria-labelledby="poza">
-            <div class="wrap cv-split">
-                <div>
-                    <h2 id="poza">O mnie</h2>
-                    <dl class="facts">
-                        <div><dt>Obecnie</dt><dd>Rozwój w programowaniu full stack</dd></div>
-                        <div><dt>Zainteresowania</dt><dd>Finanse</dd></div>
-                        <div><dt>Języki</dt><dd>Polski, angielski, hiszpański (podstawowy)</dd></div>
-                        <div><dt>Strona</dt><dd><a href="https://rafal13381.github.io">rafal13381.github.io</a></dd></div>
-                    </dl>
-                </div>
-                <div>
-                    <h2>Kompetencje</h2>
-                    <dl class="facts">
-                        <div><dt>Praca zespołowa</dt><dd>Doświadczenie w zespołach projektowych</dd></div>
-                        <div><dt>Pierwsza pomoc</dt><dd>Znajomość zasad udzielania pierwszej pomocy</dd></div>
-                        <div><dt>Prawo jazdy</dt><dd>Kategoria B</dd></div>
-                    </dl>
-                </div>
-            </div>
-        </section>
-
-        <section class="cv-close" aria-labelledby="kontakt">
-            <div class="wrap">
-                <h2 id="kontakt">Kontakt</h2>
-                <div class="cv-close-row">
+        <section class="band band-light contact" aria-labelledby="kontakt">
+            <div class="wrap contact-inner">
+                <h2 id="kontakt">Kontakt.</h2>
+                <div class="contact-row">
                     <a class="btn btn-primary btn-lg" href="https://github.com/rafal13381">GitHub @rafal13381</a>
                     <a class="text-link" href="https://github.com/rafal13381/rafal13381.github.io">Kod tej strony</a>
                 </div>

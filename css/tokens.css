@@ -1,75 +1,147 @@
+/* Tokeny systemu „w duchu Apple” (Hallmark custom). Jedyne miejsce z kolorami i krojami strony. */
 :root {
   color-scheme: light;
-  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
-  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
-  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
-  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+
+  /* skala odstępów */
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px;
+  --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+
+  /* typografia: tracking zależny od rozmiaru (design D5) */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Albert Sans", sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Albert Sans", sans-serif;
+  --font-code: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1.0625rem; --text-lg: 1.1875rem; --text-xl: 1.5rem; --text-2xl: 2rem;
+  --text-hero: clamp(3rem, 7vw, 6rem);      --track-hero: -0.035em; --lead-hero: 1.03;
+  --text-band: clamp(2.5rem, 5vw, 4.5rem);  --track-band: -0.03em;  --lead-band: 1.05;
+  --text-tile: clamp(1.75rem, 2.5vw, 2.5rem); --track-tile: -0.02em; --lead-tile: 1.1;
+  --text-lead: clamp(1.25rem, 1.6vw, 1.75rem); --track-lead: -0.01em; --lead-lead: 1.3;
+  --text-title: clamp(1.25rem, 1.4vw, 1.5rem);
+  --text-section: var(--text-band); --text-display: var(--text-hero);
+  --tracking-display: -0.02em; --display-weight: 700;
+
+  /* ruch */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
-  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
-  --container: 1280px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --dur-press: 100ms; --dur-micro: 150ms; --dur-short: 220ms; --dur-long: 420ms; --dur-theme: 200ms;
+
+  /* układ */
+  --container: 1080px; --gutter: 24px; --gap-columns: 20px;
+  --section-gap-s: 96px; --section-gap: 120px; --section-gap-l: 160px;
+  --nav-h: 48px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: oklch(84% 0.012 245); --color-paper-2: oklch(81% 0.012 245); --color-paper-3: oklch(77% 0.012 245);
-  --color-ink: oklch(16% 0.020 245); --color-ink-2: oklch(24% 0.018 245); --color-muted: oklch(38% 0.016 245);
-  --color-rule: oklch(73% 0.013 240); --color-rule-2: oklch(32% 0.018 240);
-  --color-accent: oklch(45% 0.180 350); --color-accent-2: oklch(37% 0.160 350); --color-accent-ink: oklch(97% 0.006 245); --color-focus: oklch(46% 0.190 350);
-  --color-sheet: oklch(93.5% 0.008 245);
-  --font-display: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Newsreader", ui-serif, Georgia, serif;
-  --font-outlier: "IBM Plex Mono", ui-monospace, monospace;
-  --radius-card: 0; --radius-pill: 2px; --rule-hair: 1px; --rule-bar: 2px; --shadow-card: none;
-  --tracking-display: -0.02em; --display-weight: 600;
+
+  /* kształt */
+  --radius-tile: 24px; --radius-media: 12px; --radius-tag: 8px; --radius-check: 6px; --radius-control: 980px; --radius-field: 12px;
+  --radius-card: var(--radius-tile); --radius-pill: var(--radius-control);
+  --rule-hair: 1px; --rule-bar: 1px;
+  --shadow-card: none;
+
+  /* kolory: tryb jasny */
+  --color-paper: oklch(99.4% 0.001 270);
+  --color-band: oklch(96.8% 0.002 270);
+  --color-paper-2: oklch(94.5% 0.003 270);
+  --color-paper-3: oklch(91% 0.003 270);
+  --color-ink: oklch(21% 0.004 270);
+  --color-ink-2: oklch(30% 0.004 270);
+  --color-muted: oklch(47% 0.006 270);
+  --color-rule: oklch(88% 0.003 270);
+  --color-rule-2: oklch(80% 0.004 270);
+  --color-accent: var(--color-ink);
+  --color-accent-2: oklch(36% 0.004 270);
+  --color-accent-ink: var(--color-paper);
+  --color-focus: var(--color-ink);
+  --color-sheet: var(--color-band);
+  --color-nav: oklch(99.4% 0.001 270 / 0.72);
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+
+  /* pas nocny (premiery): ciemny w obu trybach */
+  --color-night: oklch(13% 0.002 270);
+  --color-night-2: oklch(20% 0.003 270);
+  --color-night-ink: oklch(96% 0.002 270);
+  --color-night-muted: oklch(72% 0.005 270);
+  --color-night-rule: oklch(30% 0.004 270);
 }
 
-/* Tryb ciemny: odwrócony rejestr (design.md D3). */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --color-paper: oklch(19% 0.018 245); --color-paper-2: oklch(22.5% 0.018 245); --color-paper-3: oklch(26% 0.018 245);
-  --color-ink: oklch(94% 0.008 245); --color-ink-2: oklch(87% 0.010 245); --color-muted: oklch(72% 0.014 245);
-  --color-rule: oklch(32% 0.016 240); --color-rule-2: oklch(70% 0.014 240);
-  --color-accent: oklch(72% 0.150 350); --color-accent-2: oklch(80% 0.120 350); --color-accent-ink: oklch(16% 0.020 245); --color-focus: oklch(76% 0.150 350);
-  --color-sheet: oklch(23.5% 0.016 245);
+  --color-paper: oklch(17% 0.003 270);
+  --color-band: oklch(21% 0.003 270);
+  --color-paper-2: oklch(25% 0.003 270);
+  --color-paper-3: oklch(29% 0.003 270);
+  --color-ink: oklch(96% 0.002 270);
+  --color-ink-2: oklch(88% 0.003 270);
+  --color-muted: oklch(72% 0.005 270);
+  --color-rule: oklch(30% 0.004 270);
+  --color-rule-2: oklch(40% 0.004 270);
+  --color-accent-2: oklch(86% 0.003 270);
+  --color-nav: oklch(17% 0.003 270 / 0.72);
   --color-error: oklch(72% 0.16 27); --color-success: oklch(74% 0.13 150);
+  --color-night: oklch(10% 0.002 270);
+  --color-night-2: oklch(17% 0.003 270);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --color-paper: oklch(19% 0.018 245); --color-paper-2: oklch(22.5% 0.018 245); --color-paper-3: oklch(26% 0.018 245);
-    --color-ink: oklch(94% 0.008 245); --color-ink-2: oklch(87% 0.010 245); --color-muted: oklch(72% 0.014 245);
-    --color-rule: oklch(32% 0.016 240); --color-rule-2: oklch(70% 0.014 240);
-    --color-accent: oklch(72% 0.150 350); --color-accent-2: oklch(80% 0.120 350); --color-accent-ink: oklch(16% 0.020 245); --color-focus: oklch(76% 0.150 350);
-    --color-sheet: oklch(23.5% 0.016 245);
+    --color-paper: oklch(17% 0.003 270);
+    --color-band: oklch(21% 0.003 270);
+    --color-paper-2: oklch(25% 0.003 270);
+    --color-paper-3: oklch(29% 0.003 270);
+    --color-ink: oklch(96% 0.002 270);
+    --color-ink-2: oklch(88% 0.003 270);
+    --color-muted: oklch(72% 0.005 270);
+    --color-rule: oklch(30% 0.004 270);
+    --color-rule-2: oklch(40% 0.004 270);
+    --color-accent-2: oklch(86% 0.003 270);
+    --color-nav: oklch(17% 0.003 270 / 0.72);
     --color-error: oklch(72% 0.16 27); --color-success: oklch(74% 0.13 150);
+    --color-night: oklch(10% 0.002 270);
+    --color-night-2: oklch(17% 0.003 270);
   }
 }
 
-/* Pasmo tuszu (HUD gier, nakładki na płótnie): ciemne w obu trybach. */
+/* Blok motywu pasa nocnego: wszystko w środku czyta te same nazwy. */
+.band-night {
+  --color-paper: var(--color-night);
+  --color-band: var(--color-night-2);
+  --color-paper-2: oklch(24% 0.003 270);
+  --color-ink: var(--color-night-ink);
+  --color-ink-2: oklch(88% 0.003 270);
+  --color-muted: var(--color-night-muted);
+  --color-rule: var(--color-night-rule);
+  --color-accent: var(--color-night-ink);
+  --color-accent-2: oklch(86% 0.003 270);
+  --color-accent-ink: var(--color-night);
+  --color-focus: var(--color-night-ink);
+  color-scheme: dark;
+}
+
+/* HUD gry i nakładki na płótnie: ciemny materiał w obu trybach. */
 :root {
-  --color-band: oklch(16% 0.020 245); --color-band-2: oklch(24% 0.018 245);
-  --color-band-ink: oklch(93.5% 0.008 245); --color-band-muted: oklch(76% 0.012 245); --color-band-rule: oklch(36% 0.016 245);
-  --color-band-scrim: oklch(16% 0.020 245 / 0.72);
-  --color-ok: oklch(70% 0.150 150); --color-warn: oklch(78% 0.140 70); --color-bad: oklch(66% 0.190 27);
-  --color-good-msg: oklch(88% 0.120 95); --color-bad-msg: oklch(78% 0.120 27);
-  --color-road: oklch(34% 0.012 245);
-  --color-mask: oklch(16% 0.020 245);
-  --color-swatch-edge: oklch(16% 0.020 245 / 0.18);
-  --color-switch-knob: var(--color-sheet);
+  --color-hud: oklch(16% 0.004 270); --color-hud-2: oklch(26% 0.004 270);
+  --color-hud-ink: oklch(96% 0.002 270); --color-hud-muted: oklch(76% 0.005 270); --color-hud-rule: oklch(40% 0.005 270 / 0.6);
+  --color-hud-scrim: oklch(16% 0.004 270 / 0.62);
+  --color-ok: oklch(72% 0.17 150); --color-warn: oklch(80% 0.15 75); --color-bad: oklch(66% 0.20 27);
+  --color-good-msg: oklch(88% 0.12 95); --color-bad-msg: oklch(80% 0.12 27);
+  --color-road: oklch(34% 0.006 270);
+  --color-mask: oklch(16% 0.004 270);
+  --color-swatch-edge: oklch(21% 0.004 270 / 0.16);
+  --color-switch-knob: oklch(99.4% 0.001 270);
+  --color-coin: oklch(83% 0.15 88); --color-coin-edge: oklch(60% 0.12 75);
 }
 
 /* Aliasy dawnych nazw: komponenty katalogu i gier czytają je na :root.
    Podglądy stylów (.pk, .wz) ustawiają te same nazwy na swoim elemencie, więc ich nie dotyczy. */
-:root {
+:root, .band-night {
   --bg: var(--color-paper); --bg-art: var(--color-paper);
-  --surface: var(--color-sheet); --surface-2: var(--color-paper-2); --surface-raised: var(--color-sheet);
+  --surface: var(--color-band); --surface-2: var(--color-paper-2); --surface-raised: var(--color-paper);
   --text: var(--color-ink); --muted: var(--color-muted);
   --accent: var(--color-accent); --accent-hover: var(--color-accent-2); --on-accent: var(--color-accent-ink);
-  --accent-2: var(--color-accent);
+  --accent-2: var(--color-ink);
   --border: var(--color-rule); --edge: transparent;
   --success: var(--color-success); --warning: oklch(52% 0.13 60); --danger: var(--color-error);
-  --shadow-card: none; --shadow-btn: none;
-  --radius: var(--radius-card); --radius-sm: var(--radius-card); --radius-btn: var(--radius-pill); --border-w: var(--rule-hair);
+  --shadow-btn: none;
+  --radius: var(--radius-tile); --radius-sm: var(--radius-field); --radius-btn: var(--radius-control); --border-w: var(--rule-hair);
   --heading-weight: var(--display-weight); --heading-tracking: var(--tracking-display); --btn-tracking: 0;
   --spring: var(--ease-out);
-  --font-mono: var(--font-outlier);
+  --font-mono: var(--font-code);
+  --font-outlier: var(--font-body);
 }
-:root { --color-coin: oklch(83% 0.150 88); --color-coin-edge: oklch(60% 0.120 75); }

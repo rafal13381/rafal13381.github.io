@@ -39,3 +39,20 @@
         });
     });
 })();
+
+// Pasek nawigacji: cienka linia pod spodem tylko wtedy, gdy pod paskiem jest przewinięta treść.
+(function () {
+    function init() {
+        var nav = document.querySelector(".site-nav");
+        if (!nav) return;
+        var on = false;
+        function check() {
+            var next = window.scrollY > 0;
+            if (next !== on) { on = next; nav.classList.toggle("is-scrolled", on); }
+        }
+        check();
+        window.addEventListener("scroll", check, { passive: true });
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+    else init();
+})();

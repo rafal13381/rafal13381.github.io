@@ -24,18 +24,19 @@ Czysty HTML, CSS i JavaScript — bez frameworków, bundlera i kroku budowania. 
 ```
 ├── index.html, kliker.html, autostrada.html, style.html, prywatnosc.html
 ├── css/
-│   ├── tokens.css             # tokeny systemu Almanac: kolory (jasny i ciemny), kroje, skala odstępów
+│   ├── tokens.css             # tokeny wyglądu w duchu Apple: kolory (jasny, ciemny, pas nocny), kroje, skala, promienie
 │   ├── base.css               # reguły bazowe (focus, overflow, ograniczony ruch); omijają podglądy .pk i .wz
-│   ├── fonts.css              # @font-face krojów z fonts/
+│   ├── fonts.css              # @font-face Albert Sans (fallback poza urządzeniami Apple, gdzie działa systemowy SF Pro)
 │   ├── style.css              # komponenty strony: nawigacja, stopka, CV, katalog, gry
 │   ├── probka.css             # przykładowy interfejs z 21 widżetami (.pk)
 │   ├── wizytowki.css          # komponenty stron-wizytówek (.wz) — trafiają też do eksportu
 │   └── wizytowki-ramka.css    # ramka podglądu i pasek sterowania wizytówki
-├── fonts/                     # Hanken Grotesk, Newsreader, IBM Plex Mono (woff2, licencje OFL)
+├── fonts/                     # Albert Sans (woff2, licencja OFL)
 ├── img/prace/                 # zrzuty prac na stronie CV (odświeżyć po zmianach w grach lub katalogu)
 ├── js/
 │   ├── consent.js             # baner prywatności, zgoda na Google Fonts
-│   ├── theme.js               # przełącznik motywu: system / jasny / ciemny
+│   ├── theme.js               # przełącznik motywu: system / jasny / ciemny; linia pod paskiem nawigacji po przewinięciu
+│   ├── galeria.js             # galeria zrzutów na CV: przeciąganie 1:1, rzut pędu, sprężyna, opór na krańcach
 │   ├── script.js              # zegar na stronie głównej
 │   ├── script2.js             # logika gry Kliker
 │   ├── autostrada.js          # gra Autostrada: świat, fizyka auta, ruch uliczny, sklep, zapis
